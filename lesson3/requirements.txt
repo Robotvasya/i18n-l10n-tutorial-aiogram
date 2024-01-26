@@ -1,0 +1,4 @@
+aiogram
+aiogram_i18n
+fluent.runtime
+fluent_compiler
