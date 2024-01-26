@@ -1,0 +1,2 @@
+aiogram
+aiogram[i18n]

@@ -1,0 +1,43 @@
+# English translations for Bot Super Project.
+# Copyright (C) 2024 John Doe
+# This file is distributed under the same license as the Bot Super Project
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bot Super Project 0.1\n"
+"Report-Msgid-Bugs-To: john@doe-email.com\n"
+"POT-Creation-Date: 2024-01-16 16:00+0500\n"
+"PO-Revision-Date: 2024-01-12 16:16+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#: lesson1.py:15
+msgid "Start"
+msgstr "Start"
+
+#: lesson1.py:17
+msgid "Welcome, {name}!"
+msgstr "Welcome, {name}!"
+
+#: lesson1.py:18
+msgid "How many coins do you have? Input number, please:"
+msgstr "How many coins do you have? Input number, please:"
+
+#: lesson1.py:25
+msgid "You have {} coin!"
+msgid_plural "You have {} coins!"
+msgstr[0] "You have {} coin!"
+msgstr[1] "You have {} coins!"
+
+#: lesson1.py:27
+msgid "Please, enter a number"
+msgstr "Please, enter a number"
+

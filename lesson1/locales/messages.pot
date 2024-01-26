@@ -1,0 +1,42 @@
+# Translations template for Bot Super Project.
+# Copyright (C) 2024 John Doe
+# This file is distributed under the same license as the Bot Super Project
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Bot Super Project 0.1.1\n"
+"Report-Msgid-Bugs-To: john@doe-email.com\n"
+"POT-Creation-Date: 2024-01-16 16:52+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#: lesson1.py:15
+msgid "Start"
+msgstr ""
+
+#: lesson1.py:17
+msgid "Welcome, {name}!"
+msgstr ""
+
+#: lesson1.py:18
+msgid "How many coins do you have? Input number, please:"
+msgstr ""
+
+#: lesson1.py:25
+msgid "You have {} coin!"
+msgid_plural "You have {} coins!"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lesson1.py:27
+msgid "Please, enter a number"
+msgstr ""
+
