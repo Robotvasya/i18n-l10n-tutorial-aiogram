@@ -85,7 +85,7 @@ https://phrase.com/blog/posts/translation-technology/
 
 Если у вас Windows, то выполните команду
 
-.. code:: bash
+.. code:: powershell
 
    intl.cpl
 
