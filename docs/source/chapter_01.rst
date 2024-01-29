@@ -92,11 +92,11 @@ https://phrase.com/blog/posts/translation-technology/
 Вы увидите региональные настройки и в дополнительных параметрах форматы
 чисел, денег, времени, дат.
 
-.. image1:: static_/001.png
-.. image2:: static_/002.png
-.. image3:: static_/003.png
-.. image4:: static_/004.png
-.. image5:: static_/005.png
+.. image:: _static/001.png
+.. image:: _static/002.png
+.. image:: _static/003.png
+.. image:: _static/004.png
+.. image:: _static/005.png
 
 Это все требует не просто перевода, а подлежит приведению в соответствии
 с особенностями региона.
