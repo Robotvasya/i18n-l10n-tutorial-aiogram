@@ -68,13 +68,16 @@
 А **локализация** — **это перевод и культурная адаптация** всех
 элементов, такие как тексты, картинки, шрифты.
 
-Подробнее можно ознакомиться здесь:
+Дополнительные материалы:
 
-http://www.motaword.com/ru/blog/localization-vs-internationalization
+`Локализация Против Интернационализации
+<http://www.motaword.com/ru/blog/localization-vs-internationalization>`_
 
-https://habr.com/ru/articles/532836/
+`Гайд по тестированию локализации и интернационализации, а также большой и полезный checklist
+<https://habr.com/ru/articles/532836/>`_
 
-https://phrase.com/blog/posts/translation-technology/
+`Translation Technology: A Look at Its Past, Present, and Future
+<https://phrase.com/blog/posts/translation-technology/>`_
 
 Локали.
 ~~~~~~~
@@ -85,7 +88,7 @@ https://phrase.com/blog/posts/translation-technology/
 
 Если у вас Windows, то выполните команду
 
-.. code:: powershell
+.. code-block:: powershell
 
    intl.cpl
 
@@ -93,10 +96,19 @@ https://phrase.com/blog/posts/translation-technology/
 чисел, денег, времени, дат.
 
 .. image:: _static/001.png
+   :align: center
+
 .. image:: _static/002.png
+   :align: center
+
 .. image:: _static/003.png
+   :align: center
+
 .. image:: _static/004.png
+   :align: center
+
 .. image:: _static/005.png
+   :align: center
 
 Это все требует не просто перевода, а подлежит приведению в соответствии
 с особенностями региона.
@@ -105,7 +117,7 @@ https://phrase.com/blog/posts/translation-technology/
 на примере ОС Linux. В Linux эти настройки хранятся в переменных среды.
 Выполним команду:
 
-.. code:: bash
+.. code-block:: bash
 
    locale
 

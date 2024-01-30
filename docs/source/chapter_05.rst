@@ -5,23 +5,22 @@
 ~~~~~~~~~~~~~~~
 
 Для хорошей поддержки интернационализации и локализации разработчики
-Aiogram создали отдельный пакет ``aiogram_i18n``, в который добавили
-поддержку движка локализации ``Fluent для Python``
-https://github.com/projectfluent/python-fluent.
+Aiogram создали отдельный пакет ``aiogram_i18n`` `<https://github.com/aiogram/i18n>`_, в который добавили
+поддержку движка локализации ``Fluent для Python`` https://github.com/projectfluent/python-fluent.
 
 Установим его с помощью команды:
 
-.. code:: bash
+.. code-block:: bash
 
    pip install aiogram_i18n
 
 Также нам потребуются ``FluentCompileCore`` и ``FluentRuntimeCore``
 
-.. code:: bash
+.. code-block:: bash
 
    pip install fluent_compiler
 
-.. code:: bash
+.. code-block:: bash
 
    pip install fluent.runtime
 
@@ -42,7 +41,9 @@ IDE, которые могут нам помочь с извлечением с�
 
 Создадим код нашего нового проекта:
 
-.. code:: python
+.. code-block:: python
+   :caption: lesson2.py
+   :linenos:
 
    import asyncio
    from logging import basicConfig, INFO
@@ -95,9 +96,11 @@ IDE, которые могут нам помочь с извлечением с�
    if __name__ == "__main__":
        asyncio.run(main())
 
-Импортируем следующие объекты:
+Мы импортировали следующие объекты:
 
-.. code:: python
+.. code-block:: python
+   :lineno-start: 10
+
 
    from aiogram_i18n import I18nContext, LazyProxy, I18nMiddleware
    from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
@@ -118,7 +121,8 @@ IDE, которые могут нам помочь с извлечением с�
 
 Создадим объект нашего middleware:
 
-.. code:: python
+.. code-block:: python
+   :lineno-start: 38
 
    i18n_middleware = I18nMiddleware(
            core=FluentRuntimeCore(
@@ -126,37 +130,37 @@ IDE, которые могут нам помочь с извлечением с�
                ),
            default_locale="ru") # язык интерфейса. Переключать научимся позже.
 
-И зарегистрируем его через встроенный метод setup (в этом методе
-реализована регистрация компонентов в нужном порядке)
+И зарегистрируем его через встроенный метод setup (в этом методе реализована регистрация компонентов в нужном порядке)
 
-.. code:: python
+.. code-block:: python
+   :lineno-start: 45
 
    i18n_middleware.setup(dispatcher=dp)
 
 Создадим файл переводов в формате ``FTL`` (Fluent Translation List).
 
-Файл следующего содержания с английским переводом ``my-super-bot.ftl``
-положим в папку ``locales/en/LC_MESSAGES``:
+Файл следующего содержания с английским переводом ``my-super-bot.ftl`` положим в папку ``locales/en/LC_MESSAGES``:
 
-.. code:: fluent
+.. code-block:: fluent
+   :caption: locales/en/LC_MESSAGES/my-super-bot.ftl
 
    hello = Hello, <b>{ $user }</b>!
    cur-lang = Your current language: <i>{ $language }</i>
    help = Help
 
-Файл с русским переводом ``my-super-bot.ftl`` положим в папку
-``locales/ru/LC_MESSAGES``:
+Файл с русским переводом ``my-super-bot.ftl`` положим в папку ``locales/ru/LC_MESSAGES``:
 
-.. code:: fluent
+.. code-block:: fluent
+   :caption: locales/ru/LC_MESSAGES/my-super-bot.ftl
 
    hello = Привет, <b>{ $user }</b>!
    cur-lang = Текущий язык : <i>{ $language }</i>
    help = Помощь
 
-Запустим и проверим работу на русском языке. Затем изменим язык в
-middleware и проверим на английском:
+Запустим и проверим работу на русском языке. Затем изменим язык в middleware и проверим на английском:
 
-.. code:: python
+.. code-block:: python
+   :lineno-start: 38
 
    i18n_middleware = I18nMiddleware(
            core=FluentRuntimeCore(

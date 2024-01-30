@@ -104,7 +104,7 @@ Aiogram, не позволяют из коробки реализовать за
 Создадим в нашем приложении объект этого класса, и передадим туда наш
 кастомный менеджер, который реализуем ниже.
 
-.. code:: python
+.. code-block:: python
 
    async def main() -> None:
        ...
@@ -124,7 +124,7 @@ Aiogram, не позволяют из коробки реализовать за
 Начнем с реализации своего менеджера. Создадим файл
 ``middlewares/i18n_middleware.py``.
 
-.. code:: python
+.. code-block:: python
 
    from aiogram_i18n.managers import BaseManager
    from aiogram.types.user import User
@@ -172,7 +172,7 @@ Aiogram, не позволяют из коробки реализовать за
 забываем, что у i18n есть метод .setup(), который правильно регистрирует
 этот middleware.
 
-.. code:: python
+.. code-block:: python
 
    async def main() -> None:
        ...
@@ -187,7 +187,7 @@ Aiogram, не позволяют из коробки реализовать за
 Сначала пропишем наши хэндлеры. А уже в конце займемся переводами.
 Импорты:
 
-.. code:: python
+.. code-block:: python
 
    from aiogram_i18n import I18nContext, LazyProxy, I18nMiddleware
    from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
@@ -200,7 +200,7 @@ Aiogram, не позволяют из коробки реализовать за
 Первый хэндлер обрабатывает команду ``/start`` и сохраняет пользователя
 в БД. Язык нам не известен, поэтому его мы не сохраняем.
 
-.. code:: python
+.. code-block:: python
 
 
    @router.message(CommandStart())
@@ -220,7 +220,7 @@ middleware не вызывается, язык мы не можем получи
 клавиатуры, для LazyProxy экспортируем не из основной библиотеки
 aiogram, а из ``aiogram_i18n``.
 
-.. code:: python
+.. code-block:: python
 
    @router.message(Command("help"))
    @router.message(F.text == LazyProxy("help", case="capital"))
@@ -230,7 +230,7 @@ aiogram, а из ``aiogram_i18n``.
 
 Создадим хэндлер для команды обработки смены языка.
 
-.. code:: python
+.. code-block:: python
 
    async def switch_language(message: Message, i18n: I18nContext, locale_code: str):
        await i18n.set_locale(locale_code)
@@ -252,7 +252,7 @@ aiogram, а из ``aiogram_i18n``.
 Далее отправка изображения. Изображения будут лежать в
 ``locale/имя_локали/static/имя_картинки_локаль.jpg``.
 
-.. code:: python
+.. code-block:: python
 
    @router.message(Command("photo"))
    @router.message(F.text == LazyProxy("photo"))
@@ -265,7 +265,7 @@ aiogram, а из ``aiogram_i18n``.
 после ответ выдает еще и дату сообщения в формате, специфичном для
 локали пользователя. То есть "День Месяц Год" или "Month Day, Year".
 
-.. code:: python
+.. code-block:: python
 
    @router.message()
    async def handler_common(message: Message, i18n: I18nContext) -> None:
@@ -274,7 +274,7 @@ aiogram, а из ``aiogram_i18n``.
 
 Ну и клавиатура, которую мы импортировали из ``aiogram_i18n.types``
 
-.. code:: python
+.. code-block:: python
 
    # Это тестовая клавиатура
    rkb = ReplyKeyboardMarkup(
@@ -292,7 +292,7 @@ aiogram, а из ``aiogram_i18n``.
 
 Английский перевод:
 
-.. code:: fluent
+.. code-block:: fluent
 
    # This Source Code Form is subject to the terms of the Mozilla Public
    # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -363,7 +363,7 @@ aiogram, а из ``aiogram_i18n``.
 
 Русский перевод:
 
-.. code:: fluent
+.. code-block:: fluent
 
    # This Source Code Form is subject to the terms of the Mozilla Public
    # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -475,7 +475,7 @@ extension (.ftl) in folder (locales/ru/LC_MESSAGES) not found** — ошибка
 основного кода нужный аргумент для ключа. Например, в нашем переводе
 есть такое сообщение:
 
-.. code:: fluent
+.. code-block:: fluent
 
    hello = Привет, <b>{ $user }</b>!
        У тебя в клиенте { -telegram(case: "nominative") } { $language ->
@@ -489,13 +489,13 @@ extension (.ftl) in folder (locales/ru/LC_MESSAGES) not found** — ошибка
 которые нужно передать из основного кода. Мы их передаем как именованные
 аргументы:
 
-.. code:: python
+.. code-block:: python
 
    await message.answer(text=i18n.get("hello", user=name, language=i18n.locale))
 
 или еще возможен такой способ:
 
-.. code:: python
+.. code-block:: python
 
    await message.answer(text=i18n.hello(user=name, language=i18n.locale))
 

@@ -13,11 +13,15 @@
 Установка пакета для переводов происходит через дополнительную
 зависимость командой
 
-``pip install aiogram[i18n]``
+.. code-block:: bash
+
+   pip install aiogram[i18n]
 
 Либо можно непосредственно установить сам Babel
 
-``pip install Babel``
+.. code-block:: bash
+
+   pip install Babel
 
 Первый и важный шаг для работы по интернационализации — нам нужно
 подготовить наш код таким образом, чтобы он смог использовать файлы
@@ -26,46 +30,50 @@
 подстановки перевода из gettext принято обозначать ``_`` - одинарное
 нижнее подчеркивание, а вызов этой функции ``_()``.
 
-.. code:: python
+.. code-block:: python
 
    from aiogram import html
-   from aiogram.utils.i18n import gettext as _  # импортируем модуль gettext из aiogram utils как _
+   from aiogram.utils.i18n import gettext as _
+   # импортируем модуль gettext из aiogram utils как _
 
 Обертываем все строки, которые нуждаются в переводе функцией gettext.
 
 Было:
 
-.. code:: python
+.. code-block:: python
 
    async def my_handler(message: Message) -> None:
        await message.answer(f"Hello, {html.quote(message.from_user.full_name)}!")
 
 Стало:
 
-.. code:: python
+.. code-block:: python
 
    async def my_handler(message: Message) -> None:
        await message.answer(_("Hello, {name}!").format(name=html.quote(message.from_user.full_name)))
 
-**Внимание.** Gettext не может использовать f-строки. Поскольку при
-использовании f-строк нельзя сначала создать шаблон, а затем его
-использовать. Это происходит из-за того, что f-строка сразу выполняется
-и в нее подставляются значения переменных, которые должны быть
-определены ранее. А у нас сначала должен произойти перевод с
-подстановкой в шаблон строки. Поэтому нужно использовать метод строк
-``format()``.
+.. attention::
+   Обратите внимание, что Gettext **не может использовать f-строки**. Поскольку при
+   использовании f-строк нельзя сначала создать шаблон, а затем его
+   использовать. Это происходит из-за того, что f-строка сразу выполняется
+   и в нее подставляются значения переменных, которые должны быть
+   определены ранее. А у нас сначала должен произойти перевод с
+   подстановкой в шаблон строки. Поэтому нужно использовать метод строк
+   ``format()``.
 
 Более того, когда нам необходимо использовать перевод в фильтрах
 ключевых слов или магических фильтрах, то нужно будет использовать
 ленивые вызовы gettext - ``lazy_gettext``, которые будут обозначены
 ``__`` - двойное подчеркивание, а вызов этой функции ``__()``.
 
-.. code:: python
+.. code-block:: python
+   :emphasize-lines: 2
 
    from aiogram import F
-   from aiogram.utils.i18n import lazy_gettext as __  # Импортируем функцию ленивого вызова gettext как _ _
-   @router.message(F.text == __("Start"))
-   ...
+   from aiogram.utils.i18n import lazy_gettext as __
+   # Выше мы импортируем функцию ленивого вызова gettext как _ _
+
+
 
 В документации особо обращено внимание на то, что ленивые вызовы
 ``lazy gettext`` всегда следует использовать, если текущий язык в данный
@@ -81,7 +89,7 @@ aiogram.types.inline_keyboard_button.InlineKeyboardButton и т. д.).
 Сначала в коде проекта мы создаем объект класса ``I18n``, чтобы было
 понятно, какой язык будет использоваться:
 
-.. code:: python
+.. code-block:: python
 
    i18n = I18n(path="locales", default_locale="en", domain="my-super-bot")
 
@@ -127,7 +135,8 @@ middleware из ``aiogram.utils.i18n.middleware``:
 
 Наш код будет выглядеть примерно так:
 
-.. code:: python
+.. code-block:: python
+   :linenos:
 
    from aiogram import Bot, Dispatcher, F
    from aiogram.types import Message
