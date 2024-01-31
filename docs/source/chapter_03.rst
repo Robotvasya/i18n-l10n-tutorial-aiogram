@@ -350,7 +350,7 @@ Babel увидел это, сохранил нам строку, но помет
 
 .. code-block:: po
    :caption: locales/ru/LC_MESSAGES/my-super-bot.po
-   :lineno-start: 16, 17
+   :lineno-start: 16
 
    "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
    "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
