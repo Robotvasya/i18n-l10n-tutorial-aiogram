@@ -2,10 +2,10 @@ name: doc_build_workflow
 
 on:
   push:
-    branches:
-      - 'main'
     tags:
       - v**
+    branches-ignore:
+      - 'docs'
 
 jobs:
   build_docs:
