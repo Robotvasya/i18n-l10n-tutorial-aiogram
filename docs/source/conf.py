@@ -8,8 +8,8 @@
 
 project = 'i18n and l10n aiogram tutorial'
 copyright = '2024, Vergily'
-author = 'Vergily'
-release = '0.1'
+author = 'Robotvasya'
+release = '0.6'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

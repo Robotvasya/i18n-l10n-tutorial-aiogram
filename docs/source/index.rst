@@ -23,7 +23,3 @@ Aiogram i18n and l10n tutorial.
    chapter_07
    chapter_08
 
-Найти в документации:
-=====================
-
-* :ref:`search`
