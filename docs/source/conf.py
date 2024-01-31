@@ -29,4 +29,4 @@ language = 'ru'
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
-pygments_style = 'default'
+pygments_style = 'zenburn'
