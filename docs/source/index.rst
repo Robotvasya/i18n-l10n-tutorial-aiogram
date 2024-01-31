@@ -9,6 +9,8 @@ Aiogram i18n and l10n tutorial.
 
 В этом руководстве собрана информация и сделаны небольшие примеры по интернационализации и локализации Telegram ботов, написанных с использованием фреймворка Aiogram.
 
+Исходный код уроков находится `здесь <https://github.com/Robotvasya/i18n-l10n-lessons-aiogram>`_
+
 
 .. toctree::
    :maxdepth: 2
