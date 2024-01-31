@@ -45,5 +45,5 @@ jobs:
         with:
           directory: ./docs/build/html
           branch: docs
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
