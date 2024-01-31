@@ -16,7 +16,7 @@ experience).
 Спроектируем взаимодействие с пользователем следующим образом.
 
 1. Если пользователь впервые начал взаимодействовать с ботом, то мы не
-   знаем на каком языке он говорит. Попытаемся получить язык
+   знаем, на каком языке он говорит. Попытаемся получить язык
    пользователя из апдейта. Но эта опция зависит от клиента Telegram,
    которым пользуется пользователь, и часто это поле не заполнено. В
    таком случае отдадим какой-то язык по умолчанию, например,
@@ -30,7 +30,7 @@ experience).
 3. Нам нужно сделать переводы для всех элементов интерфейса, включая
    сообщения, клавиатуры, меню, алерты.
 
-4. В каких-то случаях при отправке картинок или документов —
+4. В каких-то случаях, при отправке картинок или документов, необходимо
    локализовать картинки или документы.
 
 В учебных целях мы реализуем следующие вещи:
@@ -44,7 +44,7 @@ experience).
 -  По команде ``/photo`` отправлять картинку, переведенную на текущий
    язык.
 
-Нам потребуется база данных, для хранения языка пользователя. В коде
+Нам потребуется база данных для хранения языка пользователя. В коде
 будет минимальный пример, просто "чтоб работало", а также много
 сообщений и много контекста. Ну и, как ранее говорилось, будет много
 дублирования кода - здравствуй WET, прощай DRY.
@@ -75,7 +75,7 @@ experience).
    ...
 
 База данных, интерфейс к ней, папка с переводами и локализованными
-картинками, и два внешних middleware для работы с базой данных и
+картинками и два внешних middleware для работы с базой данных и
 переводами.
 
 Базу данных и интерфейс к ней вы уже научились делать. Интерфейс БД
@@ -98,33 +98,40 @@ Aiogram, не позволяют из коробки реализовать за
 ``FSMI18nMiddleware`` - хранит локаль в хранилище FSM. Но у нас ее там
 пока нет.
 
-И у нас есть то, что нужно: ``I18nMiddleware``. Это базовый абстрактный
+Но у нас есть то, что нужно: ``I18nMiddleware``. Это базовый абстрактный
 класс для наследования и создания собственного обработчика.
 
 Создадим в нашем приложении объект этого класса, и передадим туда наш
 кастомный менеджер, который реализуем ниже.
 
+
 .. code-block:: python
+   :caption: lesson3.py
+   :emphasize-lines: 9,12
+   :lineno-start: 80
 
    async def main() -> None:
-       ...
+       basicConfig(level=INFO)
+       bot = Bot("TOKEN", parse_mode=ParseMode.HTML)
+
        dp = Dispatcher()
        dp.include_router(router)
 
+       # создаем объект middleware пакета локализации aiogram_i18n
        i18n = I18nMiddleware(
-           core=FluentRuntimeCore(
-               path="locales/{locale}/LC_MESSAGES"
-           ),
-
-           # передаем наш кастомный менеджер языка из middlewares/i18n_middleware.py
+           core=FluentRuntimeCore(path="locales/{locale}/LC_MESSAGES"),
+           #  передаем наш кастомный менеджер языка из middlewares/i18n_middleware.py:
            manager=i18n_middleware.UserManager(),
-           default_locale="en")
-       ...
+           default_locale="en"
+       )
 
-Начнем с реализации своего менеджера. Создадим файл
-``middlewares/i18n_middleware.py``.
+В конце этого раздела есть полный текст кода lesson3.py.
+
+Начнем с реализации своего менеджера. Создадим файл ``middlewares/i18n_middleware.py``.
 
 .. code-block:: python
+   :caption: middlewares/i18n_middleware.py
+   :linenos:
 
    from aiogram_i18n.managers import BaseManager
    from aiogram.types.user import User
@@ -134,13 +141,10 @@ Aiogram, не позволяют из коробки реализовать за
    class UserManager(BaseManager):
        """
        Собственная реализация middleware - менеджера для интернационализации
-       на базе класса BaseManager из библиотеки aiogram_i18n.
+       на базе класса BaseManager из библиотеки aiogram_i18n. Базовый класс
        BaseManager имеет абстрактные методы set_locale и get_locale, которые
        нам нужно реализовать. Кроме того, при инициализации объекта класса,
        выполняются LocaleSetter и LocaleGetter (см. реализацию BaseManager).
-
-       P.S. В случае использования gettext необходимо проверить реализацию
-       класса, так как не gettext не тестировалось
        """
 
        async def get_locale(self, event_from_user: User, db: Database = None) -> str:
@@ -150,6 +154,7 @@ Aiogram, не позволяют из коробки реализовать за
                if user_lang:
                    return user_lang
            return default
+
        async def set_locale(self, locale: str, event_from_user: User, db: Database = None) -> None:
            if db:
                db.set_lang(event_from_user.id, locale)
@@ -158,34 +163,34 @@ Aiogram, не позволяют из коробки реализовать за
 
 ``get_locale`` – геттер, который сначала проверяет есть ли в базе данных
 у пользователя какой-то язык. Если в базе ничего нет, то пытается
-получить язык из клиента, и если и его нет - просто отдает локаль
-по-умолчанию.
+получить язык из клиента. Если и его нет - просто отдает локаль по-умолчанию.
 
 ``set_locale`` – сеттер, который просто записывает язык в базу данных, а
-если базы нет, то ничего не делает.
+если базы нет, то ничего не делает (потому, что я не придумал что делать).
 
 Естественно, эту логику работы с языком каждый придумывает себе сам под
-свои задачи и особенности работы и используемые инструменты (кэш,
-хранилище и т.п.).
+свои задачи и особенности работы и используемые инструменты (кэш, хранилище и т.п.).
 
 Регистрируем middleware сначала для базы данных, а затем i18n. Не
 забываем, что у i18n есть метод .setup(), который правильно регистрирует
 этот middleware.
 
 .. code-block:: python
+   :caption: lesson3.py
+   :lineno-start: 80
 
    async def main() -> None:
-       ...
+
+.. code-block:: python
+   :lineno-start: 95
+
        # Регистрация middleware.
        # Сначала регистрируется middleware для базы данных, так как там хранится язык.
        dp.update.outer_middleware.register(db_middleware.DBMiddleware())
-
-       # Регистрируем i18n middleware
+       # Затем регистрируем i18n middleware
        i18n.setup(dispatcher=dp)
-       ...
 
-Сначала пропишем наши хэндлеры. А уже в конце займемся переводами.
-Импорты:
+Импорты будут такие же, как во втором уроке:
 
 .. code-block:: python
 
@@ -197,11 +202,13 @@ Aiogram, не позволяют из коробки реализовать за
        # you should import mutable objects from here if you want to use LazyProxy in them
    )
 
+Сначала пропишем наши хэндлеры. А уже в конце займемся переводами.
 Первый хэндлер обрабатывает команду ``/start`` и сохраняет пользователя
 в БД. Язык нам не известен, поэтому его мы не сохраняем.
 
 .. code-block:: python
-
+   :caption: lesson3.py
+   :lineno-start: 32
 
    @router.message(CommandStart())
    async def process_start_command(message: Message, i18n: I18nContext, db: Database):
@@ -213,14 +220,15 @@ Aiogram, не позволяют из коробки реализовать за
                             )
 
 Следующий хэндлер обрабатывает команду ``/help`` и слова ``help``,
-``Help``, ``помощь``, ``Помощь``, введенные на родном языке
-пользователя. Поскольку на момент попадания в фильтрацию объект i18n
-middleware не вызывается, язык мы не можем получить. Поэтому используем
-ленивую подстановку текстов ``LazyProxy``. Мутабельные объекты, например
-клавиатуры, для LazyProxy экспортируем не из основной библиотеки
-aiogram, а из ``aiogram_i18n``.
+``Help``, ``помощь``, ``Помощь``, введенные на родном языке пользователя.
+Поскольку на момент попадания в фильтрацию объект i18n middleware не вызывается,
+язык мы не можем получить. Поэтому используем ленивую подстановку
+текстов ``LazyProxy``. Мутабельные объекты, например клавиатуры, для LazyProxy
+экспортируем не из основной библиотеки aiogram, а из ``aiogram_i18n``.
 
 .. code-block:: python
+   :caption: lesson3.py
+   :lineno-start: 43
 
    @router.message(Command("help"))
    @router.message(F.text == LazyProxy("help", case="capital"))
@@ -231,6 +239,8 @@ aiogram, а из ``aiogram_i18n``.
 Создадим хэндлер для команды обработки смены языка.
 
 .. code-block:: python
+   :caption: lesson3.py
+   :lineno-start: 50
 
    async def switch_language(message: Message, i18n: I18nContext, locale_code: str):
        await i18n.set_locale(locale_code)
@@ -246,13 +256,13 @@ aiogram, а из ``aiogram_i18n``.
    async def switch_to_en(message: Message, i18n: I18nContext) -> None:
        await switch_language(message, i18n,"ru")
 
-Мы видим дублирование кода, но это неизбежно. Часть было вынесено в
-функцию switch_language().
+Мы видим дублирование кода, но это неизбежно. Повторяющаяся часть была вынесена в функцию switch_language().
 
-Далее отправка изображения. Изображения будут лежать в
-``locale/имя_локали/static/имя_картинки_локаль.jpg``.
+Далее отправка изображения. Изображения будут лежать в ``locale/имя_локали/static/имя_картинки_локаль.jpg``.
 
 .. code-block:: python
+   :caption: lesson3.py
+   :lineno-start: 65
 
    @router.message(Command("photo"))
    @router.message(F.text == LazyProxy("photo"))
@@ -266,6 +276,8 @@ aiogram, а из ``aiogram_i18n``.
 локали пользователя. То есть "День Месяц Год" или "Month Day, Year".
 
 .. code-block:: python
+   :caption: lesson3.py
+   :lineno-start: 74
 
    @router.message()
    async def handler_common(message: Message, i18n: I18nContext) -> None:
@@ -275,6 +287,8 @@ aiogram, а из ``aiogram_i18n``.
 Ну и клавиатура, которую мы импортировали из ``aiogram_i18n.types``
 
 .. code-block:: python
+   :caption: lesson3.py
+   :lineno-start: 25
 
    # Это тестовая клавиатура
    rkb = ReplyKeyboardMarkup(
@@ -287,12 +301,14 @@ aiogram, а из ``aiogram_i18n``.
 сообщения, когда уже язык будет известен.
 
 Осталось сделать саму локализацию. Складываем картинки в папки локалей.
-И создаем файлы переводов в формате .ftl в соответствующих папках.
+А также создаем файлы переводов в формате .ftl в соответствующих папках.
 Логика работы описана в комментариях в каждом файле.
 
 Английский перевод:
 
 .. code-block:: fluent
+   :caption: locales/en/LC_MESSAGES/messages.ftl
+   :linenos:
 
    # This Source Code Form is subject to the terms of the Mozilla Public
    # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -303,7 +319,7 @@ aiogram, а из ``aiogram_i18n``.
    ### Логика перевода изменится, не затрагивая код и другие переводы
    ### С тройного шарпа начинается комментарий уровня файла
 
-   ## Это комментарий уровня группировки блоков в тексте. См. документацию.
+   ## Это комментарий уровня группировки блоков в тексте. См. документацию Fluent.
    ## Hello section
 
    # Это пример термина. Термин начинается с дефиса.
@@ -322,7 +338,8 @@ aiogram, а из ``aiogram_i18n``.
        { $language ->
         [None] In your { -telegram(case: "common") } client a language isn't set.
                Therefore, everything will be displayed in default language.
-       *[any] Your Telegram client is set to { $language }. Therefore, everything will be displayed in this language.
+       *[any] Your Telegram client is set to { $language }.
+               Therefore, everything will be displayed in this language.
        }
 
    help = { $case ->
@@ -347,7 +364,8 @@ aiogram, а из ``aiogram_i18n``.
 
    ## Switch language section
 
-   # Название языка мы отображаем на родном языке, чтоб человек увидел знакомые буквы и поонял, что не все потеряно.
+   # Название языка мы отображаем на родном языке, чтоб человек
+   # увидел знакомые буквы и понял, что не все потеряно.
    en-lang = English
    ru-lang = Русский
    switch-to-en = Switch the interface to { en-lang }.
@@ -359,11 +377,15 @@ aiogram, а из ``aiogram_i18n``.
    ## Common messages section
 
    i-dont-know = I'm so stupid bot. Make me clever.
-   show-date = But look! Pretty date on English: { DATETIME($date_, month: "long", year: "numeric", day: "numeric", weekday: "long") }
+   show-date = But look! Pretty date on English: { DATETIME
+      ($date_, month: "long", year: "numeric", day: "numeric", weekday: "long")
+      }
 
 Русский перевод:
 
 .. code-block:: fluent
+   :caption: locales/ru/LC_MESSAGES/messages.ftl
+   :linenos:
 
    # This Source Code Form is subject to the terms of the Mozilla Public
    # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -451,7 +473,119 @@ aiogram, а из ``aiogram_i18n``.
    ## Common messages section
 
    i-dont-know = Я тупой бот. Сделай меня умным.
-   show-date = Но посмотри! Красивая дата по правилам Русского языка: { DATETIME($date_, month: "long", year: "numeric", day: "numeric", weekday: "long") }
+   show-date = Но посмотри! Красивая дата по правилам Русского языка: {
+      DATETIME($date_, month: "long", year: "numeric", day: "numeric", weekday: "long")
+      }
+
+Основной код будет такой:
+
+.. code-block:: python
+   :caption: lesson3.py
+   :linenos:
+
+   import asyncio
+   import logging
+   from logging import basicConfig, INFO
+   from typing import Any
+
+   from aiogram import Router, Dispatcher, F, Bot
+   from aiogram.enums import ParseMode
+   from aiogram.filters import CommandStart, Command
+   from aiogram.types import Message, FSInputFile
+
+   from aiogram_i18n import I18nContext, LazyProxy, I18nMiddleware
+   from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
+   from aiogram_i18n.types import (
+       ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+       # you should import mutable objects from here if you want to use LazyProxy in them
+       )
+
+   from database import database
+   from database.database import Database
+   from middlewares import db_middleware
+   from middlewares import i18n_middleware
+
+   router = Router(name=__name__)
+
+   rkb = ReplyKeyboardMarkup(
+       keyboard=[
+           [KeyboardButton(text=LazyProxy("help", case="capital"))]  # or L.help()
+       ], resize_keyboard=True
+       )
+
+
+   @router.message(CommandStart())
+   async def process_start_command(message: Message, i18n: I18nContext, db: Database):
+       if not db.get_user(message.from_user.id):
+           db.add_user(message.from_user.id, message.from_user.username)
+       name = message.from_user.full_name
+
+       await message.answer(text=i18n.hello(user=name, language=i18n.locale),# text=i18n.get("hello", user=name))
+                          reply_markup=rkb
+                          )
+
+
+   @router.message(Command("help"))
+   @router.message(F.text == LazyProxy("help", case="capital"))
+   @router.message(F.text == LazyProxy("help", case="lower"))
+   async def cmd_help(message: Message, i18n: I18nContext) -> Any:
+       return message.reply(text=i18n.get("help-message"))
+
+
+   async def switch_language(message: Message, i18n: I18nContext, locale_code: str):
+       await i18n.set_locale(locale_code)
+       await message.answer(i18n.get("lang-is-switched"), reply_markup=rkb)
+
+
+   @router.message(Command("language_en"))
+   async def switch_to_en(message: Message, i18n: I18nContext) -> None:
+       await switch_language(message, i18n,"en")
+
+
+   @router.message(Command("language_ru"))
+   async def switch_to_en(message: Message, i18n: I18nContext) -> None:
+       await switch_language(message, i18n,"ru")
+
+
+   @router.message(Command("photo"))
+   @router.message(F.text == LazyProxy("photo"))
+   async def sent_photo(message: Message, i18n: I18nContext) -> None:
+       locale_code = i18n.locale
+       path_to_photo = f"locales/{locale_code}/static/bayan_{locale_code}.jpg"
+
+       await message.answer_photo(photo=FSInputFile(path_to_photo))
+
+
+   @router.message()
+   async def handler_common(message: Message, i18n: I18nContext) -> None:
+       await message.answer(text=i18n.get("i-dont-know"))
+       await message.answer(text=i18n.get("show-date", date_=message.date))
+
+
+   async def main() -> None:
+       basicConfig(level=INFO)
+       bot = Bot("TOKEN", parse_mode=ParseMode.HTML)
+
+       dp = Dispatcher()
+       dp.include_router(router)
+
+       # создаем объект middleware пакета локализации aiogram_i18n
+       i18n = I18nMiddleware(
+           core=FluentRuntimeCore(path="locales/{locale}/LC_MESSAGES"),
+           #  передаем наш кастомный менеджер языка из middlewares/i18n_middleware.py:
+           manager=i18n_middleware.UserManager(),
+           default_locale="en"
+           )
+
+     # Регистрация мидлварей. Сначала регистрируется база данных, так как там хранится язык.
+     dp.update.outer_middleware.register(db_middleware.DBMiddleware())
+     i18n.setup(dispatcher=dp)
+
+     await dp.start_polling(bot)
+
+
+   if __name__ == "__main__":
+       asyncio.run(main())
 
 Запускаем, тестируем.
 
@@ -465,15 +599,16 @@ aiogram, а из ``aiogram_i18n``.
 extension (.ftl) in folder (locales/ru/LC_MESSAGES) not found** — ошибка
 возникает когда файл перевода не найден по указанному нами пути.
 
-**KeyNotFoundError: Key ‘enter-a-number’ not found** — ошибка возникает,
+**KeyNotFoundError: Key ‘help’ not found** — ошибка возникает,
 когда в коде есть ключ, а в переводе его нет. Например, вызываем
 ``i18n.get("help")``, а такой строчки ``help`` нет в файле перевода
 соответствующего языка.
 
 **fluent.runtime.errors.FluentReferenceError: Unknown external: user** —
 такая ошибка возникает, когда вы забываете передать в вызове функции
-основного кода нужный аргумент для ключа. Например, в нашем переводе
-есть такое сообщение:
+основного кода нужный аргумент для ключа или просто имеет место опечатка в имени.
+В нашем случае разберем на примере опечатки в переменной ``user``.
+Например, в переводе есть такое сообщение:
 
 .. code-block:: fluent
 
@@ -500,5 +635,7 @@ extension (.ftl) in folder (locales/ru/LC_MESSAGES) not found** — ошибка
    await message.answer(text=i18n.hello(user=name, language=i18n.locale))
 
 Так вот в случае, если мы неправильно указали аргумент в основном коде
-(например ``nmae`` вместо ``name``) или вообще не указали, то во время
-компиляции перевода отсутствие аргумента и вызывает ошибку.
+или вообще не указали, то во время компиляции перевода отсутствие аргумента и вызывает ошибку.
+Например ``nmae`` вместо ``name`` в строке:
+
+await message.answer(text=i18n.get("hello", user= **nmae** , language=i18n.locale))
