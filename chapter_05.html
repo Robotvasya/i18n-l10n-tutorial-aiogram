@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Глава 5. Интернационализация в Aiogram с использованием Fluent. &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Глава 6. Локализация Aiogram с помощью проекта Fluent." href="chapter_06.html" />
+    <link rel="prev" title="Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla." href="chapter_04.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Подготовка кода</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Глава 5. Интернационализация в Aiogram с использованием Fluent.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter_05.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aiogram-fluent">
+<h1>Глава 5. Интернационализация в Aiogram с использованием Fluent.<a class="headerlink" href="#aiogram-fluent" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>Подготовка кода<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Для хорошей поддержки интернационализации и локализации разработчики
+Aiogram создали отдельный пакет <code class="docutils literal notranslate"><span class="pre">aiogram_i18n</span></code> <a class="reference external" href="https://github.com/aiogram/i18n" rel="noopener noreferrer" target="_blank">https://github.com/aiogram/i18n</a>, в который добавили
+поддержку движка локализации <code class="docutils literal notranslate"><span class="pre">Fluent</span> <span class="pre">для</span> <span class="pre">Python</span></code> <a class="reference external" href="https://github.com/projectfluent/python-fluent" rel="noopener noreferrer" target="_blank">https://github.com/projectfluent/python-fluent</a>.</p>
+<p>Установим его с помощью команды:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>aiogram_i18n
+</pre></div>
+</div>
+<p>Также нам потребуются <code class="docutils literal notranslate"><span class="pre">FluentCompileCore</span></code> и <code class="docutils literal notranslate"><span class="pre">FluentRuntimeCore</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>fluent_compiler
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>fluent.runtime
+</pre></div>
+</div>
+<p>В предыдущем разделе мы рассказывали о том, что подход к созданию файлов
+перевода у Fluent в корне отличается от привычного. По сути теперь
+интернационализация полностью в ваших руках, а локализацию выполняет
+ядро Python Fluent. У нас теперь нет шаблонов перевода и мы не извлекаем
+строки из исходного кода нашего проекта. Хотя есть различные плагины для
+IDE, которые могут нам помочь с извлечением строк. Отказ от
+использования строк английского текста как ключей, накладывает некоторые
+ограничения в угоду гибкости самих переводов. Теперь нам нужно самим
+проектировать ПО так, чтобы перевод был возможен. И по-началу будет
+много ручной работы. Проект Fluent - 2017 год, и по меркам gettext 1995
+года, он еще молодой. Инструменты автоматизации, которые я нашел,
+созданы в основном для JavaScript (в силу специфики разработки под
+локализацию браузера Firefox). Поэтому пока будем создавать файлы
+перевода вручную.</p>
+<p>Создадим код нашего нового проекта:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">lesson2.py</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">INFO</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">aiogram</span> <span class="kn">import</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Dispatcher</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">Bot</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">aiogram.enums</span> <span class="kn">import</span> <span class="n">ParseMode</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">aiogram.filters</span> <span class="kn">import</span> <span class="n">CommandStart</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">aiogram.types</span> <span class="kn">import</span> <span class="n">Message</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="kn">from</span> <span class="nn">aiogram_i18n</span> <span class="kn">import</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">LazyProxy</span><span class="p">,</span> <span class="n">I18nMiddleware</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">aiogram_i18n.cores.fluent_runtime_core</span> <span class="kn">import</span> <span class="n">FluentRuntimeCore</span>
+<span class="linenos">12</span><span class="kn">from</span> <span class="nn">aiogram_i18n.types</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos">13</span>    <span class="n">ReplyKeyboardMarkup</span><span class="p">,</span> <span class="n">KeyboardButton</span>
+<span class="linenos">14</span>    <span class="c1"># you should import mutable objects from here if you want to use LazyProxy in them</span>
+<span class="linenos">15</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">rkb</span> <span class="o">=</span> <span class="n">ReplyKeyboardMarkup</span><span class="p">(</span>
+<span class="linenos">19</span>    <span class="n">keyboard</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">20</span>        <span class="p">[</span><span class="n">KeyboardButton</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">))]</span>  <span class="c1"># or L.help()</span>
+<span class="linenos">21</span>    <span class="p">],</span> <span class="n">resize_keyboard</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">CommandStart</span><span class="p">())</span>
+<span class="linenos">24</span><span class="k">async</span> <span class="k">def</span> <span class="nf">cmd_start</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos">25</span>    <span class="n">name</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">mention_html</span><span class="p">()</span>
+<span class="linenos">26</span>    <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span>
+<span class="linenos">27</span>        <span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">),</span>  <span class="c1"># or i18n.hello(user=name)</span>
+<span class="linenos">28</span>        <span class="n">reply_markup</span><span class="o">=</span><span class="n">rkb</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">))</span>
+<span class="linenos">32</span><span class="k">async</span> <span class="k">def</span> <span class="nf">cmd_help</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos">33</span>    <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;-- &quot;</span> <span class="o">+</span> <span class="n">message</span><span class="o">.</span><span class="n">text</span> <span class="o">+</span> <span class="s2">&quot; --&quot;</span><span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">36</span>    <span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+<span class="linenos">37</span>    <span class="n">bot</span> <span class="o">=</span> <span class="n">Bot</span><span class="p">(</span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span> <span class="n">parse_mode</span><span class="o">=</span><span class="n">ParseMode</span><span class="o">.</span><span class="n">HTML</span><span class="p">)</span>
+<span class="linenos">38</span>    <span class="n">i18n_middleware</span> <span class="o">=</span> <span class="n">I18nMiddleware</span><span class="p">(</span>
+<span class="linenos">39</span>        <span class="n">core</span><span class="o">=</span><span class="n">FluentRuntimeCore</span><span class="p">(</span>
+<span class="linenos">40</span>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;locales/</span><span class="si">{locale}</span><span class="s2">/LC_MESSAGES&quot;</span><span class="p">,</span>
+<span class="linenos">41</span>        <span class="p">),</span>
+<span class="linenos">42</span>        <span class="n">default_locale</span><span class="o">=</span><span class="s2">&quot;ru&quot;</span><span class="p">)</span>
+<span class="linenos">43</span>    <span class="n">dp</span> <span class="o">=</span> <span class="n">Dispatcher</span><span class="p">()</span>
+<span class="linenos">44</span>    <span class="n">dp</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">router</span><span class="p">)</span>
+<span class="linenos">45</span>    <span class="n">i18n_middleware</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">dispatcher</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>
+<span class="linenos">46</span>    <span class="k">await</span> <span class="n">dp</span><span class="o">.</span><span class="n">start_polling</span><span class="p">(</span><span class="n">bot</span><span class="p">)</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">50</span>    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<p>Мы импортировали следующие объекты:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="kn">from</span> <span class="nn">aiogram_i18n</span> <span class="kn">import</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">LazyProxy</span><span class="p">,</span> <span class="n">I18nMiddleware</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">aiogram_i18n.cores.fluent_runtime_core</span> <span class="kn">import</span> <span class="n">FluentRuntimeCore</span>
+<span class="linenos">12</span><span class="kn">from</span> <span class="nn">aiogram_i18n.types</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos">13</span>    <span class="n">ReplyKeyboardMarkup</span><span class="p">,</span> <span class="n">KeyboardButton</span>
+<span class="linenos">14</span>    <span class="c1"># you should import mutable objects from here if you want to use LazyProxy in them</span>
+<span class="linenos">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Нам понадобится сам движок <code class="docutils literal notranslate"><span class="pre">FluentRuntimeCore</span></code>, также контекст
+<code class="docutils literal notranslate"><span class="pre">I18nContext</span></code> и один из вариантов middleware (для примера я взял
+<code class="docutils literal notranslate"><span class="pre">I18nMiddleware</span></code>). Также нужны нам <code class="docutils literal notranslate"><span class="pre">LazyProxy</span></code> - ленивые строки,
+какие мы видели в <code class="docutils literal notranslate"><span class="pre">lazy</span> <span class="pre">gettext</span></code>. И изменяемые объекты Aiogram, такие,
+как клавиатура, которые нужно импортировать именно из
+<code class="docutils literal notranslate"><span class="pre">aiogram_i18n.types</span></code>. Эти объекты нам нужны, когда работа с объектом
+происходит, но язык еще не известен, так как код выполняется еще за
+пределами роутеров. И перевод будет добавлен лениво, то есть в самом
+конце перед передачей пользователю.</p>
+<p>Создадим объект нашего middleware:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">38</span><span class="n">i18n_middleware</span> <span class="o">=</span> <span class="n">I18nMiddleware</span><span class="p">(</span>
+<span class="linenos">39</span>        <span class="n">core</span><span class="o">=</span><span class="n">FluentRuntimeCore</span><span class="p">(</span>
+<span class="linenos">40</span>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;locales/</span><span class="si">{locale}</span><span class="s2">/LC_MESSAGES&quot;</span><span class="p">,</span> <span class="c1"># путь к папке локалей</span>
+<span class="linenos">41</span>            <span class="p">),</span>
+<span class="linenos">42</span>        <span class="n">default_locale</span><span class="o">=</span><span class="s2">&quot;ru&quot;</span><span class="p">)</span> <span class="c1"># язык интерфейса. Переключать научимся позже.</span>
+</pre></div>
+</div>
+<p>И зарегистрируем его через встроенный метод setup (в этом методе реализована регистрация компонентов в нужном порядке)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">45</span><span class="n">i18n_middleware</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">dispatcher</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Создадим файл переводов в формате <code class="docutils literal notranslate"><span class="pre">FTL</span></code> (Fluent Translation List).</p>
+<p>Файл следующего содержания с английским переводом <code class="docutils literal notranslate"><span class="pre">my-super-bot.ftl</span></code> положим в папку <code class="docutils literal notranslate"><span class="pre">locales/en/LC_MESSAGES</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">locales/en/LC_MESSAGES/my-super-bot.ftl</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>hello = Hello, &lt;b&gt;{ $user }&lt;/b&gt;!
+cur-lang = Your current language: &lt;i&gt;{ $language }&lt;/i&gt;
+help = Help
+</pre></div>
+</div>
+</div>
+<p>Файл с русским переводом <code class="docutils literal notranslate"><span class="pre">my-super-bot.ftl</span></code> положим в папку <code class="docutils literal notranslate"><span class="pre">locales/ru/LC_MESSAGES</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">locales/ru/LC_MESSAGES/my-super-bot.ftl</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
+cur-lang = Текущий язык : &lt;i&gt;{ $language }&lt;/i&gt;
+help = Помощь
+</pre></div>
+</div>
+</div>
+<p>Запустим и проверим работу на русском языке. Затем изменим язык в middleware и проверим на английском:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">38</span><span class="n">i18n_middleware</span> <span class="o">=</span> <span class="n">I18nMiddleware</span><span class="p">(</span>
+<span class="linenos">39</span>        <span class="n">core</span><span class="o">=</span><span class="n">FluentRuntimeCore</span><span class="p">(</span>
+<span class="linenos">40</span>            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;locales/</span><span class="si">{locale}</span><span class="s2">/LC_MESSAGES&quot;</span><span class="p">,</span> <span class="c1"># путь к папке локалей</span>
+<span class="linenos">41</span>            <span class="p">),</span>
+<span class="linenos">42</span>        <span class="n">default_locale</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="chapter_04.html" class="btn btn-neutral float-left" title="Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="chapter_06.html" class="btn btn-neutral float-right" title="Глава 6. Локализация Aiogram с помощью проекта Fluent." accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

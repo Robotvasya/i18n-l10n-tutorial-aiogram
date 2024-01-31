@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aiogram i18n and l10n tutorial. &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Глава 1. Интернационализация и Локализация." href="chapter_01.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Aiogram i18n and l10n tutorial.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aiogram-i18n-and-l10n-tutorial">
+<h1>Aiogram i18n and l10n tutorial.<a class="headerlink" href="#aiogram-i18n-and-l10n-tutorial" title="Link to this heading"></a></h1>
+<p>Добро пожаловать в руководство по интернационализации (i18n) локализации (l10n) Aiogram.</p>
+<p>В этом руководстве собрана информация и сделаны небольшие примеры по интернационализации и локализации Telegram ботов, написанных с использованием фреймворка Aiogram.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_01.html#id2">Введение.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_01.html#id4">Локали.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_02.html#id1">Подготовка кода.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_02.html#id2">Конфигурация движка перевода</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html#id1">Шаблоны переводов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html#po">Файлы переводов .po</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html#id2">Внесение изменений в файлы переводов .po</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html#id3">Множественные формы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html#mo">Компиляция переводов, файлы формата mo.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html#id4">Финальный результат.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04.html#fluent">Знакомство с Fluent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_05.html#id1">Подготовка кода</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_06.html#fluent">Синтаксис Fluent.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_07.html#id1">Практический пример</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_07.html#id2">Исправляем ошибки.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html#ai">Автоматические переводы, память, AI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html#id2">Примеры инструментов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html#id3">Домашнее задание:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="chapter_01.html" class="btn btn-neutral float-right" title="Глава 1. Интернационализация и Локализация." accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

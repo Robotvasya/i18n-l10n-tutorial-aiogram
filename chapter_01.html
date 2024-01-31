@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Глава 1. Интернационализация и Локализация. &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Глава 2. Интернационализация в Aiogram утилитами GNU gettext." href="chapter_02.html" />
+    <link rel="prev" title="Aiogram i18n and l10n tutorial." href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Глава 1. Интернационализация и Локализация.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Введение.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Локали.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Глава 1. Интернационализация и Локализация.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter_01.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Глава 1. Интернационализация и Локализация.<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2>Введение.<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><strong>Интернационализация</strong> (англ. <em>internationalization</em> или сокращенно
+<em>i18n</em>) – это процесс проектирования и разработки ПО, который позволяет
+легко перевести продукт, приложение или документ на другие языки и
+регионы без необходимости внесения технических изменений. По сути, речь
+идет о том, чтобы продукт или услуга разрабатывались таким образом,
+чтобы не отдавать предпочтение одной культуре или языку по сравнению с
+другой, и подготовить их для мировой аудитории.</p>
+<p><strong>Локализация</strong> (англ. <em>localization</em> или <em>l10n</em>) – это процесс перевода
+и культурной адаптации продукта к особенностям определенной страны,
+региона.</p>
+<p>В принципе можно пойти в лоб и создать по одному приложению на каждый
+регион/страну. Такой вариант очень дорого и неудобно поддерживать, ведь
+работать нужно будет с каждым продуктом отдельно. Далее приходит на ум
+более удобный вариант — создать приложение, которое включает в своём
+коде локализацию для всех необходимых вам регионов/стран. Вариант уже
+лучше, но и его достаточно сложно будет поддерживать. Плюс велика
+вероятность, что данные локализации будут вплотную пересекаться с
+основным кодом приложения. Далее мы приходим к мысли, что было бы удобно
+создать продукт, в котором региональные и культурные особенности (текст,
+картинки, форматы даты, времени и т.п.) будут вынесены в отдельные
+блоки. Никакого хардкода в переводимых местах, а блоки будут
+подгружаться при использовании того или иного региона/страны. Данный
+набор ресурсов называют “локалью” (locale).</p>
+<p>Реализацию интернационализации обычно начинают на ранних этапах проекта,
+чтобы подготовить ваш продукт к будущей локализации. Во время процесса
+интернационализации определяют, что будет изменяться для будущих локалей
+(например текст, изображения и т.п.) и выносят эти данные во внешние
+файлы. Также во время интернационализации (и при локализации тоже) нужно
+добавить возможность изменять календари, форматы даты, времени, цифр,
+денежных символов и в целом символов, специфичных для определенных
+языков и многое другое. Как итог, в идеальном варианте, добавление новой
+локали не должно требовать от нас изменения исходного кода продукта.</p>
+<p>Ну и, конечно, очень тесно связана с этим процессом локализация. На этой
+стадии участники разработки продукта работают с локациями — внешними
+ресурсами (файлами), которые подгружаются приложением для загрузки
+локализации для вашей страны/региона. Основные зоны локализации, то есть
+адаптации к местным нормам и традициям:</p>
+<ul class="simple">
+<li><p>текст и связанные с ним функции (например сортировка, поиск,
+поддержка спец. символов и т.п.)</p></li>
+<li><p>документация (мануалы, гайды, FAQ, разделы справки и т.п.)</p></li>
+<li><p>форматы даты и времени (Месяц/Дата/Год (США) или День Месяц Год
+(Россия))</p></li>
+<li><p>формат чисел (разделитель десятичных знаков точка или запятая)</p></li>
+<li><p>формат денежных величин</p></li>
+<li><p>поддержка различных календарей (например, неделя начинается с
+понедельника (Европа) или с воскресения (США), праздники по лунному
+календарю (Китай))</p></li>
+<li><p>изображения (картинки, иконки)</p></li>
+<li><p>звук (в частности, озвучка, если таковая имеется)</p></li>
+<li><p>реклама (текстовая, аудио, видео)</p></li>
+<li><p>и т.д.</p></li>
+</ul>
+<p>Если говорить по-простому, то <strong>интернационализация</strong> — <strong>это
+проектирование и написание кода</strong>, пригодного для перевода на разные
+языки.</p>
+<p>А <strong>локализация</strong> — <strong>это перевод и культурная адаптация</strong> всех
+элементов, такие как тексты, картинки, шрифты.</p>
+<p>Дополнительные материалы:</p>
+<p><a class="reference external" href="http://www.motaword.com/ru/blog/localization-vs-internationalization" rel="noopener noreferrer" target="_blank">Локализация Против Интернационализации</a></p>
+<p><a class="reference external" href="https://habr.com/ru/articles/532836/" rel="noopener noreferrer" target="_blank">Гайд по тестированию локализации и интернационализации, а также большой и полезный checklist</a></p>
+<p><a class="reference external" href="https://phrase.com/blog/posts/translation-technology/" rel="noopener noreferrer" target="_blank">Translation Technology: A Look at Its Past, Present, and Future</a></p>
+</section>
+<section id="id4">
+<h2>Локали.<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p><strong>Локали</strong> — это набор настроек, которые определяют язык, используемый
+системой, а также региональные особенности, такие как денежные знаки,
+формат чисел, даты и времени и наборы символов.</p>
+<p>Если у вас Windows, то выполните команду</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">intl</span><span class="p">.</span><span class="n">cpl</span>
+</pre></div>
+</div>
+<p>Вы увидите региональные настройки и в дополнительных параметрах форматы
+чисел, денег, времени, дат.</p>
+<img alt="_images/001.png" class="align-center" src="_images/001.png" />
+<img alt="_images/002.png" class="align-center" src="_images/002.png" />
+<img alt="_images/003.png" class="align-center" src="_images/003.png" />
+<img alt="_images/004.png" class="align-center" src="_images/004.png" />
+<img alt="_images/005.png" class="align-center" src="_images/005.png" />
+<p>Это все требует не просто перевода, а подлежит приведению в соответствии
+с особенностями региона.</p>
+<p>Поскольку нам интересен запуск на сервере, то мы будем рассматривать все
+на примере ОС Linux. В Linux эти настройки хранятся в переменных среды.
+Выполним команду:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>locale
+</pre></div>
+</div>
+<p>И получим список переменных среды, в которых хранятся все региональные
+настройки:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LANG</span><span class="o">=</span><span class="n">en_US</span><span class="o">.</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+<span class="n">LANGUAGE</span><span class="o">=</span>
+<span class="n">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_TIME</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_PAPER</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_NAME</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_ADDRESS</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_TELEPHONE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_MEASUREMENT</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_IDENTIFICATION</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="n">LC_ALL</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>А сами переводы для программ лежат по пути <code class="docutils literal notranslate"><span class="pre">/usr/share/locale/</span></code> (или
+<code class="docutils literal notranslate"><span class="pre">/usr/local/share/locale</span></code> или в директории <code class="docutils literal notranslate"><span class="pre">приложение/locale</span></code>) в
+папках с именем языка и подпапкой, соответствующей переменной среды для
+которой перевод. Например, для русского языка это <code class="docutils literal notranslate"><span class="pre">ru/LC_MESSAGES</span></code>, в
+этой папке лежат скомпилированные переводы для приложений по имени
+каждого приложения:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">.</span><span class="n">mo</span>
+<span class="n">debconf</span><span class="o">.</span><span class="n">mo</span>
+<span class="n">dpkg</span><span class="o">.</span><span class="n">mo</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">mo</span>
+<span class="n">xdg</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">dirs</span><span class="o">.</span><span class="n">mo</span>
+</pre></div>
+</div>
+<p>А само имя нашего приложения в дальнейшем для перевода обозначается в
+терминологии инструментов перевода как <strong>домен</strong>. Если мы создаем
+приложение на Python как пакет, то доменом у нас будет название
+приложения, совпадающее с папкой пакета.</p>
+<p>Для нашего приложения нам нет необходимости переводить большой объем
+разных данных и устанавливать в систему. Мы будем переводить только
+строки, которые выводятся пользователю LC_MESSAGES.</p>
+<p>При запуске любого приложения (не важно на каком языке это все написано,
+python или C) инструменты перевода производят поиск файлов перевода для
+подстановки переведенных строк в папке, указанной в настройках и файлы с
+именем домена. Для нашего приложения это будет папка с именем locales в
+корне проекта. Далее это мы подробнее разберем на практике.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="index.html" class="btn btn-neutral float-left" title="Aiogram i18n and l10n tutorial." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="chapter_02.html" class="btn btn-neutral float-right" title="Глава 2. Интернационализация в Aiogram утилитами GNU gettext." accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

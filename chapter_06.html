@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Глава 6. Локализация Aiogram с помощью проекта Fluent. &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Глава 7. Динамическое определение и переключение языка в Aiogram" href="chapter_07.html" />
+    <link rel="prev" title="Глава 5. Интернационализация в Aiogram с использованием Fluent." href="chapter_05.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fluent">Синтаксис Fluent.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Документация, перевод документации и примеры использования по ссылкам ниже:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Глава 6. Локализация Aiogram с помощью проекта Fluent.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter_06.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aiogram-fluent">
+<h1>Глава 6. Локализация Aiogram с помощью проекта Fluent.<a class="headerlink" href="#aiogram-fluent" title="Link to this heading"></a></h1>
+<section id="fluent">
+<h2>Синтаксис Fluent.<a class="headerlink" href="#fluent" title="Link to this heading"></a></h2>
+<p>Официальная справка по синтаксису:
+<a class="reference external" href="https://projectfluent.org/fluent/guide/" rel="noopener noreferrer" target="_blank">https://projectfluent.org/fluent/guide/</a></p>
+<p>FTL спроектирован так, чтобы его было легко читать, но в то же время он
+позволял представлять сложные понятия из естественных языков, такие как
+род, множественное число, спряжения и другие.</p>
+<p>Во Fluent основная единица перевода называется сообщением. <strong>Сообщения</strong> — это контейнеры для информации. Вы используете сообщения для
+идентификации, хранения и вызова информации о переводе, которая будет использоваться в продукте. Базовый синтаксис сообщения это —
+<code class="docutils literal notranslate"><span class="pre">идентификатор</span> <span class="pre">=</span> <span class="pre">перевод</span></code>. В синтаксисе идентификаторов используется <code class="docutils literal notranslate"><span class="pre">kebab-case</span></code>. Пример:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span># Это комментарий
+# Ниже идет сообщение
+Hello = Привет
+
+# Это пример многострочного сообщения, отступы обязательны.
+# Длинные идентификаторы пишутся через дефис. Можно включать другие сообщения
+long-message = { Hello }, это
+    многострочное сообщение.
+    Продолжение начинается с отступа.
+    Отступ может быть только пробелом.
+    Табуляция не считается отступом.
+</pre></div>
+</div>
+</div>
+<p>Синтаксис Fluent поддерживает ссылки на другие сообщения, переменные,
+селекторы, и даже функции.</p>
+<p>Давайте посмотрим их использование на примере нашего кода про монеты.
+Добавим наш хэндлер про монеты. При вводе числа бот будет писать сколько
+у вас монет.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">lesson2.py</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">39</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="linenos">40</span><span class="k">async</span> <span class="k">def</span> <span class="nf">handler_2</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">41</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">42</span>        <span class="n">name</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">mention_html</span><span class="p">()</span>
+<span class="linenos">43</span>        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="linenos">44</span>        <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;you-have-coin&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+<span class="linenos">45</span>    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">46</span>        <span class="n">logging</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">INFO</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="linenos">47</span>        <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;enter-a-number&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Нам потребуется имя пользователя и количество монет, чтобы передать эти данные в перевод.
+Переменные во Fluent, то есть объекты, которые попадают извне из питоновских функций
+в сообщения, обозначаются <code class="docutils literal notranslate"><span class="pre">{$</span> <span class="pre">переменная</span> <span class="pre">}</span></code>. Через контекст <code class="docutils literal notranslate"><span class="pre">I18nContext</span></code>, переданный в
+хэндлер, мы будем получать строки переводов, а переменные Fluent
+передавать как именованные аргументы: i18n.get(<code class="docutils literal notranslate"><span class="pre">идентификатор</span></code>,
+<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">40</span><span class="k">async</span> <span class="k">def</span> <span class="nf">handler_2</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">44</span><span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;you-have-coin&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>В переменную <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$value</span> <span class="pre">}</span></code> отправим наше число монет n: <code class="docutils literal notranslate"><span class="pre">value=n</span></code>. А
+имя пользователя name в переменную <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$user</span> <span class="pre">}</span></code> отправим так: <code class="docutils literal notranslate"><span class="pre">user=name</span></code>.
+Переменные отправляются как именованные аргументы (kwargs) в основном коде.</p>
+<p>А в нашем файле перевода добавим эти переменные в нужное место:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">locales/ru/LC_MESSAGES/my-super-bot.ftl</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="hll">hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
+</span><span class="hll">cur-lang = Текущий язык : &lt;i&gt;{ $language }&lt;/i&gt;
+</span>help = Помощь
+<span class="hll">you-have-coin = У пользователя { $user } { $value -&gt;
+</span>        [0] совсем нет монет
+        [one] имеется одна монета
+<span class="hll">        [few] { $value } монеты
+</span><span class="hll">        *[many] есть { $value } монет
+</span>    }!
+enter-a-number = введите число
+</pre></div>
+</div>
+</div>
+<p>Сообщение <strong>you-have-coin</strong> использует подстановку данных, полученных
+извне (из нашего основного кода) в переменные <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$user</span> <span class="pre">}</span></code> и
+<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$value</span> <span class="pre">}</span></code>, а также у переменной <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$value</span> <span class="pre">}</span></code> есть <strong>селекторы</strong>
+<code class="docutils literal notranslate"><span class="pre">[селектор]</span></code>, которые помогут выбрать форму сообщения в зависимости от
+количества монет. Синтаксис такой:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>идентификатор = необязательный текст { $переменная -&gt;
+   *[селектор] вариант текста 1
+    [селектор]  вариант текста 2
+    } еще необязательный текст
+</pre></div>
+</div>
+<p>Итак, у нас есть сообщение, которое формирует строку перевода:
+подставляет в <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$user</span> <span class="pre">}</span></code> имя пользователя <code class="docutils literal notranslate"><span class="pre">name</span></code>, а из <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$value</span> <span class="pre">}</span></code> берется наша переменна <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+С помощью селекторов происходит выбор множественной формы: <code class="docutils literal notranslate"><span class="pre">[one]</span></code> при <code class="docutils literal notranslate"><span class="pre">n</span></code> равному 1, <code class="docutils literal notranslate"><span class="pre">[few]</span></code> при n от 2 до 4-х,
+и <code class="docutils literal notranslate"><span class="pre">[many]</span></code> в остальных случаях. Кроме того, мы добавили (просто для примера) собственный селектор <code class="docutils literal notranslate"><span class="pre">[0]</span></code>, для
+случая <code class="docutils literal notranslate"><span class="pre">n</span></code>, равного 0. Он будет выводить сообщение, что монет нет,
+без указания самого числа, при <code class="docutils literal notranslate"><span class="pre">n</span></code> равном 0.</p>
+<p>Будьте внимательны при переносе строк.</p>
+<p>Звездочкой <code class="docutils literal notranslate"><span class="pre">*</span></code> отмечается вариант селектора по-умолчанию, если Fluent
+не смог применить ни один селектор. Вариант по-умолчанию должен быть указан всегда.</p>
+<p>Поскольку, в английском нет малой множественной формы, то будем
+обозначать вариантом по-умолчанию <code class="docutils literal notranslate"><span class="pre">[many]</span></code>, а единственное число
+вычислится в обоих языках по селектору <code class="docutils literal notranslate"><span class="pre">[one]</span></code>.</p>
+<p>Обратите внимание, что нам удалось всю сложную логику уместить в одном сообщении.</p>
+<p>Текст перевода для английского:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">locales/en/LC_MESSAGES/my-super-bot.ftl</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="hll">hello = Hello, &lt;b&gt;{ $user }&lt;/b&gt;!
+</span><span class="hll">cur-lang = Your current language: &lt;i&gt;{ $language }&lt;/i&gt;
+</span>help = Help
+<span class="hll">you-have-coin = The user { $user } { $value -&gt;
+</span>        [zero] hasn&#39;t got nothing
+        [one] have one coin
+<span class="hll">       *[many] has { $value } coins
+</span>    }!
+enter-a-number = Input a number, please.
+</pre></div>
+</div>
+</div>
+<p>В английском мы сделали свою логику, а в русском - свою. При этом
+заметьте, что не надо ничего менять в коде проекта.</p>
+<p>Селекторы неявно обрабатываются встроенными функциями внутри Fluent. Но
+если нужны еще более сложные вещи, то можно придумать свою функцию
+внутри перевода и применять ее в конкретном переводе. Об этом можно
+прочитать в документации: <a class="reference external" href="https://projectfluent.org/fluent/guide/functions.html" rel="noopener noreferrer" target="_blank">https://projectfluent.org/fluent/guide/functions.html</a>.</p>
+<p>Еще пару слов о селекторах. Селектор может быть строкой. В этом случае
+он будет сравниваться непосредственно с ключами вариантов, определенных
+в выражении выбора.</p>
+<p>Для селекторов, которые являются числами, ключи вариантов либо точно
+соответствуют числу (мы сделали <code class="docutils literal notranslate"><span class="pre">[0]</span></code> для n равному 0), либо
+соответствуют категории множественного числа по справочнику проекта
+<strong>unicode CLDR</strong> <a class="reference external" href="https://cldr.unicode.org/" rel="noopener noreferrer" target="_blank">https://cldr.unicode.org/</a> для числа. Возможные категории
+множественных чисел: <code class="docutils literal notranslate"><span class="pre">[zero]</span></code>, <code class="docutils literal notranslate"><span class="pre">[one]</span></code>, <code class="docutils literal notranslate"><span class="pre">[two]</span></code>, <code class="docutils literal notranslate"><span class="pre">[few]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[many]</span></code>, <code class="docutils literal notranslate"><span class="pre">[other]</span></code>.</p>
+<p>Если перевод требует, чтобы число было отформатировано не по умолчанию,
+селектор должен использовать те же параметры форматирования.
+Отформатированное число затем будет использоваться для выбора правильной
+категории множественного числа CLDR, которая для некоторых языков может
+отличаться от категории неформатированного числа. Вот пример из
+документации:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>your-score =
+    { NUMBER($score, minimumFractionDigits: 1) -&gt;
+        [0.0]   You scored zero points. What happened?
+       *[other] You scored { NUMBER($score, minimumFractionDigits: 1) } points.
+    }
+</pre></div>
+</div>
+</div>
+<p>Замечу, что здесь NUMBER – это встроенная функция, которая вызывается
+явно. Подробнее в документации: <a class="reference external" href="https://projectfluent.org/fluent/functions.html#built-in-functions" rel="noopener noreferrer" target="_blank">https://projectfluent.org/fluent/functions.html#built-in-functions</a>.</p>
+<p>Еще один пример использования селекторов — склонение имен и выражения
+для разных родов существительных.</p>
+<p>Например, у нас уже есть в базе данных пол пользователя, и мы хотим вывести строку
+<em>«Вася ответил(а) на ваше сообщение»</em>.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>mention = { $mention-user } ответил(а) на ваше сообщение.
+</pre></div>
+</div>
+</div>
+<p>Преобразуем это в человеческий вид:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>mention =
+  { $mention-user } { $user-gender -&gt;
+    [male]  ответил
+<span class="hll">    [female] ответила
+</span>    *[other] ответил(а)
+  }  на ваше сообщение.
+</pre></div>
+</div>
+</div>
+<p>Мы добавили третью опцию <code class="docutils literal notranslate"><span class="pre">[other]</span></code> и отметили ее <code class="docutils literal notranslate"><span class="pre">*</span></code> как опцию по-умолчанию.
+В случаях, когда пол не получен, будет выдаваться обезличенная строка.
+И в хэндлер нам нужно лишь дополнительно передать селектор в виде пола
+(естественно из базы нужно его извлечь в виде male, female, так как будет произведено сравнение строк).
+Примерно предполагается так:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gender</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">gender_data</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mention&quot;</span><span class="p">,</span> <span class="n">mention</span><span class="o">-</span><span class="n">user</span><span class="o">=</span><span class="n">gender</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Еще один интересный кейс, это работа с параметризованными терминами, что
+очень важно для флективных языков.</p>
+<p><strong>Термин</strong>, это отдельный вид сообщений, начинающийся со знака дефис:
+<code class="docutils literal notranslate"><span class="pre">-термин</span></code>. Значения терминов следуют тем же правилам, что и значения
+сообщений. Они могут быть и простым текстом, и включать в себя другие
+выражения, включая переменные. Но сообщения получают данные для
+переменных непосредственно из приложения, а вот термины получают такие
+данные из сообщений, в которых они используются. То есть все происходит
+внутри файлов перевода. Передача параметра выглядит так:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-термин(параметр:</span> <span class="pre">значение_параметра)</span></code>, где переменные и значение
+параметра, доступные внутри термина, определены в скобках, например:</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>-brand-name =⠀
+  { $case -&gt;
+    *[nominative] Aiogram
+    [prepositional] Aiogram’е
+  }
+about = Информация об { -brand-name(case: &quot;prepositional&quot;) }.
+download = Скачать { -brand-name }
+</pre></div>
+</div>
+</div>
+<p>Это фактически те же селекторы, но работают внутри файлов переводов.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;about&quot;</span><span class="p">))</span>
+<span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;download&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Результат формирования сообщений будет <em>“Информация об Aiogram’е”</em> и
+<em>“Скачать Aiogram”</em>.</p>
+<p>Передавая термин с параметром, вы можете определить выражение с
+несколькими вариантами одного и того же значения термина. Этот шаблон
+может быть полезен для определения аспектов термина, которые могут быть
+связаны с грамматической или стилистической особенностью языка. Во
+многих флективных языках (немецком, финском, венгерском, и славянских
+языках), предлог о (об) определяет падеж. Это может быть винительный
+падеж (немецкий), абляционный падеж (латинский) или предложный падеж (русский).
+Падежи могут быть определены посредством параметризации, а термин вызываться
+в нужной форме из других сообщений. Если в термин не переданы никакие
+параметры или если на термин ссылаются без скобок, будет использован
+вариант по умолчанию.</p>
+<p>Важно, что параметризованный вызов терминов улучшает перевод на
+конкретном языке, не затрагивая структуру основного кода приложения.</p>
+<p><strong>Даты.</strong> Что касается правильного формирования дат, синтаксис Fluent
+поддерживает библиотеки форматов вышеупомянутой CLDR, достаточно
+записать строку с нужными параметрами форматирования и передать в неё
+время:</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>order-time = Время заказа: { DATETIME($date, month: &quot;long&quot;, year: &quot;numeric&quot;, day: &quot;numeric&quot;, weekday: &quot;long&quot;) }
+</pre></div>
+</div>
+</div>
+<p>В качестве переменной мы должны передать время в формате Unix Time:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">unixdate</span> <span class="o">=</span> <span class="mi">556593884000</span>
+<span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;order-time&quot;</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">unixdate</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>На выходе мы получим примерно: <em>“Время заказа: вторник, 30 апреля 2019 г.”</em> - для русского языка,
+и <em>“Время заказа: Tuesday, April 30, 2019”</em> для английского языка.</p>
+<p>Ну вот мы познакомились с проектом Fluent. Несмотря на то, что он
+направлен на работу с фронтэндом и переводом UI браузера, мы смело можем
+его использовать в своих проектах на Python.</p>
+<section id="id1">
+<h3>Документация, перевод документации и примеры использования по ссылкам ниже:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>WIKI проекта на Github <a class="reference external" href="https://github.com/projectfluent/fluent/wiki" rel="noopener noreferrer" target="_blank">https://github.com/projectfluent/fluent/wiki</a></p>
+<p>Документация <a class="reference external" href="https://projectfluent.org/fluent/guide/" rel="noopener noreferrer" target="_blank">https://projectfluent.org/fluent/guide/</a></p>
+<p>Перевод документации <a class="reference external" href="https://blog.wtigga.com/fluent-syntax/" rel="noopener noreferrer" target="_blank">https://blog.wtigga.com/fluent-syntax/</a></p>
+<p>Playground песочница <a class="reference external" href="https://projectfluent.org/play/" rel="noopener noreferrer" target="_blank">https://projectfluent.org/play/</a></p>
+<p>Примеры <a class="reference external" href="https://blog.wtigga.com/fluent-practice/" rel="noopener noreferrer" target="_blank">https://blog.wtigga.com/fluent-practice/</a></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="chapter_05.html" class="btn btn-neutral float-left" title="Глава 5. Интернационализация в Aiogram с использованием Fluent." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="chapter_07.html" class="btn btn-neutral float-right" title="Глава 7. Динамическое определение и переключение языка в Aiogram" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

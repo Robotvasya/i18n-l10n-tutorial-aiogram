@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Заключение и домашнее задание. &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="prev" title="Глава 7. Динамическое определение и переключение языка в Aiogram" href="chapter_07.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Заключение и домашнее задание.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ai">Автоматические переводы, память, AI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Примеры инструментов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Домашнее задание:</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Заключение и домашнее задание.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter_08.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Заключение и домашнее задание.<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>Как вы видите, наш код стал достаточно сложным. Кодовая база разрослась, появилась куча зависимостей.
+Но появилась и гибкость в отображении контента, с учетом локальных особенностей пользователей разных регионов.</p>
+<p>В связи с этим старайтесь продумывать архитектуру вашего приложения,
+не бойтесь делать рефакторинг на ранних этапах и экспериментировать.</p>
+<p>Для полноты, пару слов о всяких полезных вещах.</p>
+<section id="ai">
+<h2>Автоматические переводы, память, AI<a class="headerlink" href="#ai" title="Link to this heading"></a></h2>
+<p>Для переводчиков существую целые платформы онлайн и оффлайн программы
+для переводов программного обеспечения, как платные, так и бесплатные.
+Основные удобства заключаются в реализации базовых вещей для перевода:</p>
+<ul class="simple">
+<li><p>Организация памяти переводов (Translation memory) — онлайн и оффлайн
+инструменты организации запоминания переводов для вашей кодовой базы
+и ваших продуктов, а также подобных продуктов других разработчиков.
+Позволяет единообразно переводить свои приложения и не придумывать
+свои переводы для уже устоявшихся терминов (вечная борьба терминов
+папка - директория - каталог);</p></li>
+<li><p>Автоматизация и черновые машинные переводы;</p></li>
+<li><p>Переводы коммьюнити, фрилансеров, профессиональных переводчиков;</p></li>
+<li><p>Переводы с помощью искуственного интелекта (AI), например проект
+DeepL;</p></li>
+<li><p>Работа в сообществе и соавторстве, многопользовательская работа;</p></li>
+<li><p>Поддержка контекстов переводов (Например, слово Save в меню —
+сохранить, Save в играх — спасти);</p></li>
+<li><p>Статьи, форумы, соцсети и прочее.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>Примеры инструментов<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://crowdin.com/" rel="noopener noreferrer" target="_blank">https://crowdin.com/</a> — это облачное программное обеспечение для
+локализации на базе искусственного интеллекта для команд и предприятий.
+Есть бесплатный тариф.</p>
+<p><a class="reference external" href="https://www.transifex.com/open-source/" rel="noopener noreferrer" target="_blank">https://www.transifex.com/open-source/</a> — облачная платформа локализации.
+Так же имеет бесплатный тариф для open-source проектов.</p>
+<p><a class="reference external" href="https://pofile.net/" rel="noopener noreferrer" target="_blank">https://pofile.net/</a> — PoEdit, бесплатный онлайн инструмент для работы с
+.po файлами. (будьте аккуратнее — оно исправляет plural forms по очень
+странным правилам)</p>
+<p><a class="reference external" href="https://poedit.net/" rel="noopener noreferrer" target="_blank">https://poedit.net/</a> — PoEditor, оффлайн программа для удобного пакетного
+перевода .po файлов (в версии pro умеет использовать нейросеть DeepL).</p>
+<p><a class="reference external" href="https://weblate.org/ru/" rel="noopener noreferrer" target="_blank">https://weblate.org/ru/</a> — инструмент он-лайн переводов, который также
+можно развернуть из Docker на своем сервере.</p>
+<p><a class="reference external" href="https://omegat.org/" rel="noopener noreferrer" target="_blank">https://omegat.org/</a> — OmegaT проект организации памяти переводов
+(Translation memory). <a class="reference external" href="https://blog.wtigga.com/tag/omegat/" rel="noopener noreferrer" target="_blank">Пример использования
+OmegaT</a>.</p>
+<p><a class="reference external" href="https://www.deepl.com/translator" rel="noopener noreferrer" target="_blank">https://www.deepl.com/translator</a> — система машинного перевода. Имеется
+бесплатный тариф.</p>
+<p>Ну и еще их куча. Как пример моего поиска в интернете:</p>
+<p>Инструменты управления переводами:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.g2.com/categories/translation-management/free" rel="noopener noreferrer" target="_blank">https://www.g2.com/categories/translation-management/free</a></p></li>
+</ul>
+<p>Аналоги программ похожих на Poedit:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://аналог-программы.рф/app/poedit" rel="noopener noreferrer" target="_blank">https://аналог-программы.рф/app/poedit</a></p></li>
+<li><p><a class="reference external" href="https://suse.me/apps/poedit/" rel="noopener noreferrer" target="_blank">https://suse.me/apps/poedit/</a></p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>Домашнее задание:<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Сделать перевод инлайн кнопок, и всплывающей подсказки, появляющейся при нажатии на них. Перевести меню бота.</p></li>
+<li><p>Исправить работу вывода даты в ответах бота. Необходимо, чтобы выводился день недели и месяц в правильном формате.</p></li>
+<li><p>Написать код, который проверяет пол (из бд), в случае необходимости запрашивает у пользователя и формирует сообщение на двух языках:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>«Ты, %username% мог(ла) бы чаще улыбаться!»</em></p></li>
+<li><p><em>«Его (её, их) фото пора отправлять в сториз.»</em></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Написать кэширование к при работе с языком, чтобы не обращаться с запросом в БД при обработке каждого события. Реализовать хранение, например, в сторадже Redis.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="chapter_07.html" class="btn btn-neutral float-left" title="Глава 7. Динамическое определение и переключение языка в Aiogram" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

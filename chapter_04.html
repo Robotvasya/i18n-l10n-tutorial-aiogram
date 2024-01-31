@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla. &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Глава 5. Интернационализация в Aiogram с использованием Fluent." href="chapter_05.html" />
+    <link rel="prev" title="Глава 3. Локализация Aiogram, создание переводов и работа с Babel." href="chapter_03.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fluent">Знакомство с Fluent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_07.html">Глава 7. Динамическое определение и переключение языка в Aiogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter_04.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fluent-mozilla">
+<h1>Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.<a class="headerlink" href="#fluent-mozilla" title="Link to this heading"></a></h1>
+<section id="fluent">
+<h2>Знакомство с Fluent<a class="headerlink" href="#fluent" title="Link to this heading"></a></h2>
+<p><strong>Fluent</strong> — это семейство спецификаций, реализаций и практик
+локализации, разработанных компанией Mozilla, при разработке своего
+браузера Firefox и сопутствующих продуктов. С проектом Fluent вы можете
+ознакомиться здесь: <a class="reference external" href="https://projectfluent.org/" rel="noopener noreferrer" target="_blank">https://projectfluent.org/</a> и реализацией под Python:
+<a class="reference external" href="https://github.com/projectfluent/python-fluent" rel="noopener noreferrer" target="_blank">https://github.com/projectfluent/python-fluent</a></p>
+<p>Отвлечемся от кода и поговорим о процессе разработки. Одной из
+постоянных задач глобальной разработки программного обеспечения является
+сокращение технического долга и устаревшего кода. Расстановка
+приоритетов имеет место, когда становится ясно, что организации
+необходимо заменить устаревший код чем-то более эффективным и
+современным. Очень часто устаревший код, влияющий на интернационализацию
+(i18n) и локализацию (l10n), оказывается одной из последних областей
+кодовой базы, которым уделяется приоритетное внимание.</p>
+<p>Согласно традиционному процессу локализации программного обеспечения,
+локализованный продукт создается в результате объединения статических
+языковых ресурсов в исполняемый файл, который затем распространяется
+среди пользователей. Любое обновление этих языковых ресурсов требует
+создания нового исполняемого файла и передачи его пользователям по
+цепочке распространения. По этой причине большинство
+компаний-разработчиков программного обеспечения предпочитают откладывать
+обновления локализации с момента их доступности до момента, когда их
+можно будет объединить с другими улучшениями программного обеспечения.</p>
+<p>С помощью Fluent этот процесс можно разделить, что позволяет выпускать
+обновления локализации независимо от более широкого графика выпуска.
+Языковые ресурсы не являются частью программного пакета, а доставляются
+пользователям посредством безопасных вызовов API при запуске
+программного обеспечения. Более того, эти вызовы API позволяют
+доставлять обновления локализации без вмешательства пользователя — нет
+необходимости вручную инициировать обновление, а в некоторых случаях
+даже перезапускать программное обеспечение.</p>
+<p>Еще одна проблема, которую решает проект, в локализации программного
+обеспечения доминирует устаревшая парадигма: перевод представляет собой
+всего лишь словарь строк, которые взаимно однозначно сопоставляются с
+английской (en-US) копией. Эта парадигма несправедлива и ограничивает
+языки с более сложной грамматикой, чем английская. Для любой
+грамматической функции, не поддерживаемой английским языком, в исходный
+код должен быть добавлен специальный случай, что приводит к пробросу
+этой логики во все переводы. Более того, создание хороших
+пользовательских интерфейсов, которые зависят от множества внешних
+аргументов, сложно и требует от разработчика понимания грамматики
+языков, на которые нацелен продукт.</p>
+<p>Fluent поддерживает ассиметричную локализацию. Асимметричная локализация
+не ограничивается множественным числом. Свободный перевод может
+варьироваться в зависимости от пола, грамматического падежа,
+операционной системы и многих других переменных. Все это происходит
+изолированно. То, что один язык имеет преимущества более
+продвинутой логики, не требует какой-либо другой локализации для его
+применения. Каждая локализация контролирует сложность перевода. То есть
+Fluent дает переводчикам возможность создавать грамматически правильные
+переводы и использовать выразительную силу своего языка, не влияя на другие переводы.</p>
+<p>Кроме этого, более гибок процесс отображения непереведенных элементов.
+Он не привязан жестко к английскому варианту, а выбирается из цепочки
+резервных локалей, которые понимает конкретный не англоговорящий пользователь.</p>
+<p>Обзорную статью можно посмотреть здесь:
+<a class="reference external" href="https://multilingual.com/issues/sept-oct-2019/fluent-firefoxs-new-localization-system/" rel="noopener noreferrer" target="_blank">https://multilingual.com/issues/sept-oct-2019/fluent-firefoxs-new-localization-system/</a></p>
+<p>Хорошие практики и описание почему при переводе надо отказаться от
+принципа DRY (Don’t Repeat Yourself) в пользу принципа WET (Write
+Everything Twice), вы можете прочитать здесь:
+<a class="reference external" href="https://github.com/projectfluent/fluent/wiki/Good-Practices-for-Developers" rel="noopener noreferrer" target="_blank">https://github.com/projectfluent/fluent/wiki/Good-Practices-for-Developers</a></p>
+<p>Вообще интернационализация и локализация заставляют применять очень разнообразные подходы
+к разработке программного обеспечения. Приходится совмещать несовместимые вещи,
+такие как избежание дублирования кода с многократным повторением кода и текстов,
+адаптированных под национальные особенности.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="chapter_03.html" class="btn btn-neutral float-left" title="Глава 3. Локализация Aiogram, создание переводов и работа с Babel." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="chapter_05.html" class="btn btn-neutral float-right" title="Глава 5. Интернационализация в Aiogram с использованием Fluent." accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

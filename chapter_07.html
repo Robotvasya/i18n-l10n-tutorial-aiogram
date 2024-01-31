@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Глава 7. Динамическое определение и переключение языка в Aiogram &mdash; документация i18n and l10n aiogram tutorial 0.6</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=c824535d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82864fe3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Заключение и домашнее задание." href="chapter_08.html" />
+    <link rel="prev" title="Глава 6. Локализация Aiogram с помощью проекта Fluent." href="chapter_06.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            i18n and l10n aiogram tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chapter_01.html">Глава 1. Интернационализация и Локализация.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_02.html">Глава 2. Интернационализация в Aiogram утилитами GNU gettext.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_03.html">Глава 3. Локализация Aiogram, создание переводов и работа с Babel.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04.html">Глава 4. Локализация и интернационализация на базе проект Fluent от Mozilla.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_05.html">Глава 5. Интернационализация в Aiogram с использованием Fluent.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_06.html">Глава 6. Локализация Aiogram с помощью проекта Fluent.</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Глава 7. Динамическое определение и переключение языка в Aiogram</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Практический пример</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Исправляем ошибки.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_08.html">Заключение и домашнее задание.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">i18n and l10n aiogram tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Глава 7. Динамическое определение и переключение языка в Aiogram</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter_07.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aiogram">
+<h1>Глава 7. Динамическое определение и переключение языка в Aiogram<a class="headerlink" href="#aiogram" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>Практический пример<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Теперь мы знаем, как проводится интернационализация и локализация
+продукта. Но нам бы хотелось это все внедрить в интерфейс нашего
+приложения на фреймворке Aiogram, чтобы повысить качество UX (user
+experience).</p>
+<p>Пример будет реализован с помощью Fluent, поскольку gettext уже изучен и
+по факту является промышленным стандартом. А нам хочется попробовать
+что-то новое.</p>
+<p>Спроектируем взаимодействие с пользователем следующим образом.</p>
+<ol class="arabic simple">
+<li><p>Если пользователь впервые начал взаимодействовать с ботом, то мы не
+знаем, на каком языке он говорит. Попытаемся получить язык
+пользователя из апдейта. Но эта опция зависит от клиента Telegram,
+которым пользуется пользователь, и часто это поле не заполнено. В
+таком случае отдадим какой-то язык по умолчанию, например,
+английский.</p></li>
+<li><p>Если пользователь выбрал в меню бота или отправил команду выбора
+языка, то сохраним язык в базе данных и переключим язык. В
+дальнейшем, при взаимодействии, будем использовать язык из базы
+данных.</p></li>
+<li><p>Нам нужно сделать переводы для всех элементов интерфейса, включая
+сообщения, клавиатуры, меню, алерты.</p></li>
+<li><p>В каких-то случаях, при отправке картинок или документов, необходимо
+локализовать картинки или документы.</p></li>
+</ol>
+<p>В учебных целях мы реализуем следующие вещи:</p>
+<ul class="simple">
+<li><p>Наш бот будет стартовать по команде <code class="docutils literal notranslate"><span class="pre">/start</span></code></p></li>
+<li><p>выводить текст помощи по команде <code class="docutils literal notranslate"><span class="pre">/help</span></code> или после получения слова
+<code class="docutils literal notranslate"><span class="pre">помощь</span></code> или <code class="docutils literal notranslate"><span class="pre">help</span></code>, в зависимости от текущего языка.</p></li>
+<li><p>Отдавать клавиатуру на нужном языке.</p></li>
+<li><p>По команде <code class="docutils literal notranslate"><span class="pre">/languge_en</span></code> и <code class="docutils literal notranslate"><span class="pre">/languge_ru</span></code> переключаться на
+соответствующий язык.</p></li>
+<li><p>По команде <code class="docutils literal notranslate"><span class="pre">/photo</span></code> отправлять картинку, переведенную на текущий
+язык.</p></li>
+</ul>
+<p>Нам потребуется база данных для хранения языка пользователя. В коде
+будет минимальный пример, просто «чтоб работало», а также много
+сообщений и много контекста. Ну и, как ранее говорилось, будет много
+дублирования кода - здравствуй WET, прощай DRY.</p>
+<p>Структура части проекта, отвечающая за интернационализацию и
+локализацию, будет примерно такой:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...
+├───database
+│       bot.db
+│       database.py
+├───locales
+│   ├───en
+│   │   ├───LC_MESSAGES
+│   │   │       messages.ftl
+│   │   └───static
+│   │           bayan_en.jpg
+│   └───ru
+│       ├───LC_MESSAGES
+│       │       messages.ftl
+│       └───static
+│               bayan_ru.jpg
+└───middlewares
+        db_middleware.py
+        i18n_middleware.py
+...
+</pre></div>
+</div>
+<p>База данных, интерфейс к ней, папка с переводами и локализованными
+картинками и два внешних middleware для работы с базой данных и
+переводами.</p>
+<p>Базу данных и интерфейс к ней вы уже научились делать. Интерфейс БД
+должен уметь добавлять пользователя и получать его язык. Этого
+достаточно для нашего примера.</p>
+<p>Самое главное, это то, что классы движка перевода, реализованные в
+Aiogram, не позволяют из коробки реализовать задуманный нами функционал.
+В главе <a class="reference internal" href="chapter_02.html#id2"><span class="std std-ref">Конфигурация движка перевода</span></a> мы уже приводили описание этих классов.
+Напомню:</p>
+<p><code class="docutils literal notranslate"><span class="pre">SimpleI18nMiddleware</span></code> - выбирает код языка из объекта User,
+полученного в событии. Однако не все клиенты Telegram отдают это
+значение. Очень часто объект language_code не заполнен и является пустой
+строкой.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ConstI18nMiddleware</span></code> - выбирает статически определенную локаль. Это
+не динамично и скучно.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FSMI18nMiddleware</span></code> - хранит локаль в хранилище FSM. Но у нас ее там
+пока нет.</p>
+<p>Но у нас есть то, что нужно: <code class="docutils literal notranslate"><span class="pre">I18nMiddleware</span></code>. Это базовый абстрактный
+класс для наследования и создания собственного обработчика.</p>
+<p>Создадим в нашем приложении объект этого класса, и передадим туда наш
+кастомный менеджер, который реализуем ниже.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">80</span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">81</span>    <span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+<span class="linenos">82</span>    <span class="n">bot</span> <span class="o">=</span> <span class="n">Bot</span><span class="p">(</span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span> <span class="n">parse_mode</span><span class="o">=</span><span class="n">ParseMode</span><span class="o">.</span><span class="n">HTML</span><span class="p">)</span>
+<span class="linenos">83</span>
+<span class="linenos">84</span>    <span class="n">dp</span> <span class="o">=</span> <span class="n">Dispatcher</span><span class="p">()</span>
+<span class="linenos">85</span>    <span class="n">dp</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">router</span><span class="p">)</span>
+<span class="linenos">86</span>
+<span class="linenos">87</span>    <span class="c1"># создаем объект middleware пакета локализации aiogram_i18n</span>
+<span class="hll"><span class="linenos">88</span>    <span class="n">i18n</span> <span class="o">=</span> <span class="n">I18nMiddleware</span><span class="p">(</span>
+</span><span class="linenos">89</span>        <span class="n">core</span><span class="o">=</span><span class="n">FluentRuntimeCore</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;locales/</span><span class="si">{locale}</span><span class="s2">/LC_MESSAGES&quot;</span><span class="p">),</span>
+<span class="linenos">90</span>        <span class="c1">#  передаем наш кастомный менеджер языка из middlewares/i18n_middleware.py:</span>
+<span class="hll"><span class="linenos">91</span>        <span class="n">manager</span><span class="o">=</span><span class="n">i18n_middleware</span><span class="o">.</span><span class="n">UserManager</span><span class="p">(),</span>
+</span><span class="linenos">92</span>        <span class="n">default_locale</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>
+<span class="linenos">93</span>    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>В конце этого раздела есть полный текст кода lesson3.py.</p>
+<p>Начнем с реализации своего менеджера. Создадим файл <code class="docutils literal notranslate"><span class="pre">middlewares/i18n_middleware.py</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">middlewares/i18n_middleware.py</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">aiogram_i18n.managers</span> <span class="kn">import</span> <span class="n">BaseManager</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">aiogram.types.user</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">database.database</span> <span class="kn">import</span> <span class="n">Database</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">class</span> <span class="nc">UserManager</span><span class="p">(</span><span class="n">BaseManager</span><span class="p">):</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 8</span><span class="sd">    Собственная реализация middleware - менеджера для интернационализации</span>
+<span class="linenos"> 9</span><span class="sd">    на базе класса BaseManager из библиотеки aiogram_i18n. Базовый класс</span>
+<span class="linenos">10</span><span class="sd">    BaseManager имеет абстрактные методы set_locale и get_locale, которые</span>
+<span class="linenos">11</span><span class="sd">    нам нужно реализовать. Кроме того, при инициализации объекта класса,</span>
+<span class="linenos">12</span><span class="sd">    выполняются LocaleSetter и LocaleGetter (см. реализацию BaseManager).</span>
+<span class="linenos">13</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_locale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_from_user</span><span class="p">:</span> <span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos">16</span>        <span class="n">default</span> <span class="o">=</span> <span class="n">event_from_user</span><span class="o">.</span><span class="n">language_code</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_locale</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="n">db</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="n">user_lang</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_lang</span><span class="p">(</span><span class="n">event_from_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="n">user_lang</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="k">return</span> <span class="n">user_lang</span>
+<span class="linenos">21</span>        <span class="k">return</span> <span class="n">default</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>    <span class="k">async</span> <span class="k">def</span> <span class="nf">set_locale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">event_from_user</span><span class="p">:</span> <span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">24</span>        <span class="k">if</span> <span class="n">db</span><span class="p">:</span>
+<span class="linenos">25</span>            <span class="n">db</span><span class="o">.</span><span class="n">set_lang</span><span class="p">(</span><span class="n">event_from_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">locale</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>По сути мы просто реализовали два метода:</p>
+<p><code class="docutils literal notranslate"><span class="pre">get_locale</span></code> – геттер, который сначала проверяет есть ли в базе данных
+у пользователя какой-то язык. Если в базе ничего нет, то пытается
+получить язык из клиента. Если и его нет - просто отдает локаль по-умолчанию.</p>
+<p><code class="docutils literal notranslate"><span class="pre">set_locale</span></code> – сеттер, который просто записывает язык в базу данных, а
+если базы нет, то ничего не делает (потому, что я не придумал что делать).</p>
+<p>Естественно, эту логику работы с языком каждый придумывает себе сам под
+свои задачи и особенности работы и используемые инструменты (кэш, хранилище и т.п.).</p>
+<p>Регистрируем middleware сначала для базы данных, а затем i18n. Не
+забываем, что у i18n есть метод .setup(), который правильно регистрирует
+этот middleware.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">80</span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">95</span>    <span class="c1"># Регистрация middleware.</span>
+<span class="linenos">96</span>    <span class="c1"># Сначала регистрируется middleware для базы данных, так как там хранится язык.</span>
+<span class="linenos">97</span>    <span class="n">dp</span><span class="o">.</span><span class="n">update</span><span class="o">.</span><span class="n">outer_middleware</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">db_middleware</span><span class="o">.</span><span class="n">DBMiddleware</span><span class="p">())</span>
+<span class="linenos">98</span>    <span class="c1"># Затем регистрируем i18n middleware</span>
+<span class="linenos">99</span>    <span class="n">i18n</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">dispatcher</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Импорты будут такие же, как во втором уроке:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aiogram_i18n</span> <span class="kn">import</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">LazyProxy</span><span class="p">,</span> <span class="n">I18nMiddleware</span>
+<span class="kn">from</span> <span class="nn">aiogram_i18n.cores.fluent_runtime_core</span> <span class="kn">import</span> <span class="n">FluentRuntimeCore</span>
+
+<span class="kn">from</span> <span class="nn">aiogram_i18n.types</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ReplyKeyboardMarkup</span><span class="p">,</span> <span class="n">KeyboardButton</span><span class="p">,</span> <span class="n">ReplyKeyboardRemove</span>
+    <span class="c1"># you should import mutable objects from here if you want to use LazyProxy in them</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Сначала пропишем наши хэндлеры. А уже в конце займемся переводами.
+Первый хэндлер обрабатывает команду <code class="docutils literal notranslate"><span class="pre">/start</span></code> и сохраняет пользователя
+в БД. Язык нам не известен, поэтому его мы не сохраняем.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">32</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">CommandStart</span><span class="p">())</span>
+<span class="linenos">33</span><span class="k">async</span> <span class="k">def</span> <span class="nf">process_start_command</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">):</span>
+<span class="linenos">34</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">db</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">id</span><span class="p">):</span>
+<span class="linenos">35</span>        <span class="n">db</span><span class="o">.</span><span class="n">add_user</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">name</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">full_name</span>
+<span class="linenos">37</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">locale</span><span class="p">),</span>
+<span class="linenos">38</span>                         <span class="n">reply_markup</span><span class="o">=</span><span class="n">rkb</span>
+<span class="linenos">39</span>                         <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Следующий хэндлер обрабатывает команду <code class="docutils literal notranslate"><span class="pre">/help</span></code> и слова <code class="docutils literal notranslate"><span class="pre">help</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Help</span></code>, <code class="docutils literal notranslate"><span class="pre">помощь</span></code>, <code class="docutils literal notranslate"><span class="pre">Помощь</span></code>, введенные на родном языке пользователя.
+Поскольку на момент попадания в фильтрацию объект i18n middleware не вызывается,
+язык мы не можем получить. Поэтому используем ленивую подстановку
+текстов <code class="docutils literal notranslate"><span class="pre">LazyProxy</span></code>. Мутабельные объекты, например клавиатуры, для LazyProxy
+экспортируем не из основной библиотеки aiogram, а из <code class="docutils literal notranslate"><span class="pre">aiogram_i18n</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">43</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">))</span>
+<span class="linenos">44</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s2">&quot;capital&quot;</span><span class="p">))</span>
+<span class="linenos">45</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">))</span>
+<span class="linenos">46</span><span class="k">async</span> <span class="k">def</span> <span class="nf">cmd_help</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos">47</span>    <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;help-message&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Создадим хэндлер для команды обработки смены языка.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">50</span><span class="k">async</span> <span class="k">def</span> <span class="nf">switch_language</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">locale_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="linenos">51</span>    <span class="k">await</span> <span class="n">i18n</span><span class="o">.</span><span class="n">set_locale</span><span class="p">(</span><span class="n">locale_code</span><span class="p">)</span>
+<span class="linenos">52</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lang-is-switched&quot;</span><span class="p">),</span> <span class="n">reply_markup</span><span class="o">=</span><span class="n">rkb</span><span class="p">)</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;language_en&quot;</span><span class="p">))</span>
+<span class="linenos">56</span><span class="k">async</span> <span class="k">def</span> <span class="nf">switch_to_en</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">57</span>    <span class="k">await</span> <span class="n">switch_language</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">,</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;language_ru&quot;</span><span class="p">))</span>
+<span class="linenos">61</span><span class="k">async</span> <span class="k">def</span> <span class="nf">switch_to_en</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">62</span>    <span class="k">await</span> <span class="n">switch_language</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">,</span><span class="s2">&quot;ru&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Мы видим дублирование кода, но это неизбежно. Повторяющаяся часть была вынесена в функцию switch_language().</p>
+<p>Далее отправка изображения. Изображения будут лежать в <code class="docutils literal notranslate"><span class="pre">locale/имя_локали/static/имя_картинки_локаль.jpg</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;photo&quot;</span><span class="p">))</span>
+<span class="linenos">66</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;photo&quot;</span><span class="p">))</span>
+<span class="linenos">67</span><span class="k">async</span> <span class="k">def</span> <span class="nf">sent_photo</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">68</span>    <span class="n">locale_code</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">locale</span>
+<span class="linenos">69</span>    <span class="n">path_to_photo</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;locales/</span><span class="si">{</span><span class="n">locale_code</span><span class="si">}</span><span class="s2">/static/my_image_</span><span class="si">{</span><span class="n">locale_code</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+<span class="linenos">70</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer_photo</span><span class="p">(</span><span class="n">photo</span><span class="o">=</span><span class="n">FSInputFile</span><span class="p">(</span><span class="n">path_to_photo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Следующий хэндлер отвечает за обработку остальных сообщений. При этом он
+после ответ выдает еще и дату сообщения в формате, специфичном для
+локали пользователя. То есть «День Месяц Год» или «Month Day, Year».</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">74</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">()</span>
+<span class="linenos">75</span><span class="k">async</span> <span class="k">def</span> <span class="nf">handler_common</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">76</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;i-dont-know&quot;</span><span class="p">))</span>
+<span class="linenos">77</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;show-date&quot;</span><span class="p">,</span> <span class="n">date_</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">date</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Ну и клавиатура, которую мы импортировали из <code class="docutils literal notranslate"><span class="pre">aiogram_i18n.types</span></code></p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">25</span><span class="c1"># Это тестовая клавиатура</span>
+<span class="linenos">26</span><span class="n">rkb</span> <span class="o">=</span> <span class="n">ReplyKeyboardMarkup</span><span class="p">(</span>
+<span class="linenos">27</span>    <span class="n">keyboard</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">28</span>        <span class="p">[</span><span class="n">KeyboardButton</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s2">&quot;capital&quot;</span><span class="p">))]</span>  <span class="c1"># or L.help()</span>
+<span class="linenos">29</span>    <span class="p">],</span> <span class="n">resize_keyboard</span><span class="o">=</span><span class="kc">True</span>
+<span class="linenos">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Текст клавиатуры будет также лениво переведен в момент отправки
+сообщения, когда уже язык будет известен.</p>
+<p>Осталось сделать саму локализацию. Складываем картинки в папки локалей.
+А также создаем файлы переводов в формате .ftl в соответствующих папках.
+Логика работы описана в комментариях в каждом файле.</p>
+<p>Английский перевод:</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">locales/en/LC_MESSAGES/messages.ftl</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span># This Source Code Form is subject to the terms of the Mozilla Public
+<span class="linenos"> 2</span># License, v. 2.0. If a copy of the MPL was not distributed with this
+<span class="linenos"> 3</span># file, You can obtain one at http://mozilla.org/MPL/2.0/.
+<span class="linenos"> 4</span># Это был пример лицензии
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>### Файл примера перевода на английский язык
+<span class="linenos"> 7</span>### Логика перевода изменится, не затрагивая код и другие переводы
+<span class="linenos"> 8</span>### С тройного шарпа начинается комментарий уровня файла
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>## Это комментарий уровня группировки блоков в тексте. См. документацию Fluent.
+<span class="linenos">11</span>## Hello section
+<span class="linenos">12</span>
+<span class="linenos">13</span># Это пример термина. Термин начинается с дефиса.
+<span class="linenos">14</span># Посмотрите как это работало в русском переводе. Здесь же мы изменим логику.
+<span class="linenos">15</span># Падежи нам не нужны, но может потребоваться притяжательная форма
+<span class="linenos">16</span>-telegram = { $case -&gt;
+<span class="linenos">17</span>     *[common] Telegram
+<span class="linenos">18</span>      [possessive] Telegram&#39;s
+<span class="linenos">19</span>    }
+<span class="linenos">20</span>
+<span class="linenos">21</span># { $user } - user name, { $language } - language code.
+<span class="linenos">22</span># Это было описание переменных, которые попадают сюда из основного кода приложения.
+<span class="linenos">23</span># Термин мы берем из этого же файла перевода,
+<span class="linenos">24</span># и вставляем с параметром нужного контекста использования (в нашем случае падежа).
+<span class="linenos">25</span>hello = Hi, &lt;b&gt;{ $user }&lt;/b&gt;!
+<span class="linenos">26</span>    { $language -&gt;
+<span class="linenos">27</span>     [None] In your { -telegram(case: &quot;common&quot;) } client a language isn&#39;t set.
+<span class="linenos">28</span>            Therefore, everything will be displayed in default language.
+<span class="linenos">29</span>    *[any] Your Telegram client is set to { $language }.
+<span class="linenos">30</span>            Therefore, everything will be displayed in this language.
+<span class="linenos">31</span>    }
+<span class="linenos">32</span>
+<span class="linenos">33</span>help = { $case -&gt;
+<span class="linenos">34</span>    *[capital] Help
+<span class="linenos">35</span>     [lower] help
+<span class="linenos">36</span>    }
+<span class="linenos">37</span>help-message =
+<span class="linenos">38</span>    &lt;b&gt;Welcome to the bot.&lt;/b&gt;
+<span class="linenos">39</span>    Our bot can&#39;t do anything useful, but it can switch languages with dexterity.
+<span class="linenos">40</span>
+<span class="linenos">41</span>    The following commands are available in the bot:
+<span class="linenos">42</span>    /start to start working with the bot.
+<span class="linenos">43</span>    /help or just send the word &lt;b&gt;&lt;i&gt;help&lt;/i&gt;&lt;/b&gt; to show this message.
+<span class="linenos">44</span>    /language_en { switch-to-en }
+<span class="linenos">45</span>    /language_ru { switch-to-ru }
+<span class="linenos">46</span>    /photo or just send the word &lt;b&gt;&lt;i&gt;photo&lt;/i&gt;&lt;/b&gt; to send photo to you.
+<span class="linenos">47</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span># { $language } - language code.
+<span class="linenos">50</span># The current language is { $language }.
+<span class="linenos">51</span>cur-lang = The current language is: &lt;i&gt;{ $language }&lt;/i&gt;
+<span class="linenos">52</span>
+<span class="linenos">53</span>## Switch language section
+<span class="linenos">54</span>
+<span class="linenos">55</span># Название языка мы отображаем на родном языке, чтоб человек
+<span class="linenos">56</span># увидел знакомые буквы и понял, что не все потеряно.
+<span class="linenos">57</span>en-lang = English
+<span class="linenos">58</span>ru-lang = Русский
+<span class="linenos">59</span>switch-to-en = Switch the interface to { en-lang }.
+<span class="linenos">60</span>switch-to-ru = Switch the interface to { ru-lang }.
+<span class="linenos">61</span>lang-is-switched = Display language is { en-lang }.
+<span class="linenos">62</span>
+<span class="linenos">63</span>photo = photo
+<span class="linenos">64</span>
+<span class="linenos">65</span>## Common messages section
+<span class="linenos">66</span>
+<span class="linenos">67</span>i-dont-know = I&#39;m so stupid bot. Make me clever.
+<span class="linenos">68</span>show-date = But look! Pretty date on English: { DATETIME
+<span class="linenos">69</span>   ($date_, month: &quot;long&quot;, year: &quot;numeric&quot;, day: &quot;numeric&quot;, weekday: &quot;long&quot;)
+<span class="linenos">70</span>   }
+</pre></div>
+</div>
+</div>
+<p>Русский перевод:</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">locales/ru/LC_MESSAGES/messages.ftl</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span># This Source Code Form is subject to the terms of the Mozilla Public
+<span class="linenos"> 2</span># License, v. 2.0. If a copy of the MPL was not distributed with this
+<span class="linenos"> 3</span># file, You can obtain one at http://mozilla.org/MPL/2.0/.
+<span class="linenos"> 4</span># Это был пример лицензии
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>### Файл примера перевода на русский язык
+<span class="linenos"> 7</span>### Важно. Не забудь полить помидоры...
+<span class="linenos"> 8</span>### С тройного шарпа начинается комментарий уровня файла
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>## Это комментарий уровня группировки блоков в тексте. См. документацию.
+<span class="linenos">11</span>## Hello section
+<span class="linenos">12</span>
+<span class="linenos">13</span># Это пример термина. Термин начинается с дефиса.
+<span class="linenos">14</span># Термины можно передавать внутри сообщений, указывая переменные для параметризации в скобках.
+<span class="linenos">15</span># То есть это как атрибуты, но мы их задаем в тексте переводов, а не получаем извне.
+<span class="linenos">16</span># Мы будем издеваться над языком, чтобы увидеть как и что работает
+<span class="linenos">17</span>-telegram = {$case -&gt;
+<span class="linenos">18</span>    *[nominative] Телеграм {&quot;{&quot;}Telegram{&quot;}&quot;}
+<span class="linenos">19</span>     [genitive] Телеграма ({&quot;{&quot;}Telegram&#39;а{&quot;}&quot;})
+<span class="linenos">20</span>     [dative] Телеграму ({&quot;{&quot;}Telegram&#39;у{&quot;}&quot;})
+<span class="linenos">21</span>     [accusative] Телеграм ({&quot;{&quot;}Telegram{&quot;}&quot;})
+<span class="linenos">22</span>     [instrumental] Телеграмом ({&quot;{&quot;}Telegram&#39;ом{&quot;}&quot;})
+<span class="linenos">23</span>     [prepositional] Телеграме ({&quot;{&quot;}Telegram&#39;е{&quot;}&quot;})
+<span class="linenos">24</span>    }
+<span class="linenos">25</span># {&quot;}&quot;}  это пример экранированного символа.
+<span class="linenos">26</span># Падежи
+<span class="linenos">27</span># nominative - именительный
+<span class="linenos">28</span># genitive - родительный
+<span class="linenos">29</span># dative - дательный
+<span class="linenos">30</span># accusative - винительный
+<span class="linenos">31</span># instrumental творительный.
+<span class="linenos">32</span># prepositional - предложный
+<span class="linenos">33</span>
+<span class="linenos">34</span># { $user } - user name, { $language } - language code.
+<span class="linenos">35</span># Это было описание переменных, которые попадают сюда из основного кода приложения.
+<span class="linenos">36</span># Термин мы берем из этого же файла перевода,
+<span class="linenos">37</span># и вставляем с параметром нужного контекста использования (в нашем случае падежа).
+<span class="linenos">38</span>hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
+<span class="linenos">39</span>        У тебя в клиенте { -telegram(case: &quot;nominative&quot;) } { $language -&gt;
+<span class="linenos">40</span>     [None] не указан язык, поэтому все будет отображается на языке по-умолчанию.
+<span class="linenos">41</span>    *[any] указан язык { $language }, поэтому все будет отображается на этом языке.
+<span class="linenos">42</span>    }
+<span class="linenos">43</span>
+<span class="linenos">44</span># а так мы вставляем символы unicode по номеру \uHHHH. Например,
+<span class="linenos">45</span># tears-of-joy1 = {&quot;\U01F602&quot;}
+<span class="linenos">46</span># tears-of-joy2 = 😂
+<span class="linenos">47</span>
+<span class="linenos">48</span>help = { $case -&gt;
+<span class="linenos">49</span>    *[capital] Помощь
+<span class="linenos">50</span>     [lower] помощь
+<span class="linenos">51</span>    }
+<span class="linenos">52</span>
+<span class="linenos">53</span>help-message =
+<span class="linenos">54</span>    &lt;b&gt;Добро пожаловать в бота.&lt;/b&gt;
+<span class="linenos">55</span>    Наш бот не умеет ничего полезного, однако с ловкостью может переключать язык.
+<span class="linenos">56</span>
+<span class="linenos">57</span>    В боте доступны следующие команды:
+<span class="linenos">58</span>    /start чтобы начать работать с ботом
+<span class="linenos">59</span>    /help или просто отправьте слово &lt;b&gt;&lt;i&gt;помощь&lt;/i&gt;&lt;/b&gt;, чтобы показать это сообщение
+<span class="linenos">60</span>    /language_en { switch-to-en }
+<span class="linenos">61</span>    /language_ru { switch-to-ru }
+<span class="linenos">62</span>    /photo или просто отправьте слово &lt;b&gt;&lt;i&gt;фото&lt;/i&gt;&lt;/b&gt;, чтобы прислать вам картинку
+<span class="linenos">63</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span># Это комментарий подсказка для переводчиков (чтобы не искать что значат эти переменные в коде,
+<span class="linenos">66</span># который не факт ,что они получат, а если и получат, то не поймут:
+<span class="linenos">67</span>
+<span class="linenos">68</span># { $language } - language code.
+<span class="linenos">69</span># The current language is { $language }.
+<span class="linenos">70</span>cur-lang = Текущий язык: &lt;i&gt;{ $language }&lt;/i&gt;
+<span class="linenos">71</span>
+<span class="linenos">72</span>## Switch language section
+<span class="linenos">73</span>
+<span class="linenos">74</span>en-lang = English
+<span class="linenos">75</span>ru-lang = Русский
+<span class="linenos">76</span>switch-to-en = Переключить интерфейс на { en-lang } язык.
+<span class="linenos">77</span>
+<span class="linenos">78</span># В фигурных скобках пример интерполяции одного сообщения в другом.
+<span class="linenos">79</span>switch-to-ru = Переключить интерфейс на { ru-lang } язык.
+<span class="linenos">80</span>lang-is-switched = Язык переключен на { ru-lang }.
+<span class="linenos">81</span>
+<span class="linenos">82</span>photo = фото
+<span class="linenos">83</span>
+<span class="linenos">84</span>## Common messages section
+<span class="linenos">85</span>
+<span class="linenos">86</span>i-dont-know = Я тупой бот. Сделай меня умным.
+<span class="linenos">87</span>show-date = Но посмотри! Красивая дата по правилам Русского языка: {
+<span class="linenos">88</span>   DATETIME($date_, month: &quot;long&quot;, year: &quot;numeric&quot;, day: &quot;numeric&quot;, weekday: &quot;long&quot;)
+<span class="linenos">89</span>   }
+</pre></div>
+</div>
+</div>
+<p>Основной код будет такой:</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">lesson3.py</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos">  2</span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">basicConfig</span><span class="p">,</span> <span class="n">INFO</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="kn">from</span> <span class="nn">aiogram</span> <span class="kn">import</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Dispatcher</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">Bot</span>
+<span class="linenos">  7</span><span class="kn">from</span> <span class="nn">aiogram.enums</span> <span class="kn">import</span> <span class="n">ParseMode</span>
+<span class="linenos">  8</span><span class="kn">from</span> <span class="nn">aiogram.filters</span> <span class="kn">import</span> <span class="n">CommandStart</span><span class="p">,</span> <span class="n">Command</span>
+<span class="linenos">  9</span><span class="kn">from</span> <span class="nn">aiogram.types</span> <span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">FSInputFile</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="kn">from</span> <span class="nn">aiogram_i18n</span> <span class="kn">import</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">LazyProxy</span><span class="p">,</span> <span class="n">I18nMiddleware</span>
+<span class="linenos"> 12</span><span class="kn">from</span> <span class="nn">aiogram_i18n.cores.fluent_runtime_core</span> <span class="kn">import</span> <span class="n">FluentRuntimeCore</span>
+<span class="linenos"> 13</span><span class="kn">from</span> <span class="nn">aiogram_i18n.types</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 14</span>    <span class="n">ReplyKeyboardMarkup</span><span class="p">,</span> <span class="n">KeyboardButton</span><span class="p">,</span> <span class="n">ReplyKeyboardRemove</span>
+<span class="linenos"> 15</span>    <span class="c1"># you should import mutable objects from here if you want to use LazyProxy in them</span>
+<span class="linenos"> 16</span>    <span class="p">)</span>
+<span class="linenos"> 17</span>
+<span class="linenos"> 18</span><span class="kn">from</span> <span class="nn">database</span> <span class="kn">import</span> <span class="n">database</span>
+<span class="linenos"> 19</span><span class="kn">from</span> <span class="nn">database.database</span> <span class="kn">import</span> <span class="n">Database</span>
+<span class="linenos"> 20</span><span class="kn">from</span> <span class="nn">middlewares</span> <span class="kn">import</span> <span class="n">db_middleware</span>
+<span class="linenos"> 21</span><span class="kn">from</span> <span class="nn">middlewares</span> <span class="kn">import</span> <span class="n">i18n_middleware</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span><span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span><span class="n">rkb</span> <span class="o">=</span> <span class="n">ReplyKeyboardMarkup</span><span class="p">(</span>
+<span class="linenos"> 26</span>    <span class="n">keyboard</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos"> 27</span>        <span class="p">[</span><span class="n">KeyboardButton</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s2">&quot;capital&quot;</span><span class="p">))]</span>  <span class="c1"># or L.help()</span>
+<span class="linenos"> 28</span>    <span class="p">],</span> <span class="n">resize_keyboard</span><span class="o">=</span><span class="kc">True</span>
+<span class="linenos"> 29</span>    <span class="p">)</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">CommandStart</span><span class="p">())</span>
+<span class="linenos"> 33</span><span class="k">async</span> <span class="k">def</span> <span class="nf">process_start_command</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">):</span>
+<span class="linenos"> 34</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">db</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">id</span><span class="p">):</span>
+<span class="linenos"> 35</span>        <span class="n">db</span><span class="o">.</span><span class="n">add_user</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+<span class="linenos"> 36</span>    <span class="n">name</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">from_user</span><span class="o">.</span><span class="n">full_name</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">hello</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">locale</span><span class="p">),</span><span class="c1"># text=i18n.get(&quot;hello&quot;, user=name))</span>
+<span class="linenos"> 39</span>                       <span class="n">reply_markup</span><span class="o">=</span><span class="n">rkb</span>
+<span class="linenos"> 40</span>                       <span class="p">)</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">))</span>
+<span class="linenos"> 44</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s2">&quot;capital&quot;</span><span class="p">))</span>
+<span class="linenos"> 45</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">))</span>
+<span class="linenos"> 46</span><span class="k">async</span> <span class="k">def</span> <span class="nf">cmd_help</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="linenos"> 47</span>    <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;help-message&quot;</span><span class="p">))</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span><span class="k">async</span> <span class="k">def</span> <span class="nf">switch_language</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">,</span> <span class="n">locale_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="linenos"> 51</span>    <span class="k">await</span> <span class="n">i18n</span><span class="o">.</span><span class="n">set_locale</span><span class="p">(</span><span class="n">locale_code</span><span class="p">)</span>
+<span class="linenos"> 52</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lang-is-switched&quot;</span><span class="p">),</span> <span class="n">reply_markup</span><span class="o">=</span><span class="n">rkb</span><span class="p">)</span>
+<span class="linenos"> 53</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;language_en&quot;</span><span class="p">))</span>
+<span class="linenos"> 56</span><span class="k">async</span> <span class="k">def</span> <span class="nf">switch_to_en</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 57</span>    <span class="k">await</span> <span class="n">switch_language</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">,</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span>
+<span class="linenos"> 60</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;language_ru&quot;</span><span class="p">))</span>
+<span class="linenos"> 61</span><span class="k">async</span> <span class="k">def</span> <span class="nf">switch_to_en</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 62</span>    <span class="k">await</span> <span class="n">switch_language</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">,</span><span class="s2">&quot;ru&quot;</span><span class="p">)</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">Command</span><span class="p">(</span><span class="s2">&quot;photo&quot;</span><span class="p">))</span>
+<span class="linenos"> 66</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">LazyProxy</span><span class="p">(</span><span class="s2">&quot;photo&quot;</span><span class="p">))</span>
+<span class="linenos"> 67</span><span class="k">async</span> <span class="k">def</span> <span class="nf">sent_photo</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 68</span>    <span class="n">locale_code</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">locale</span>
+<span class="linenos"> 69</span>    <span class="n">path_to_photo</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;locales/</span><span class="si">{</span><span class="n">locale_code</span><span class="si">}</span><span class="s2">/static/bayan_</span><span class="si">{</span><span class="n">locale_code</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+<span class="linenos"> 70</span>
+<span class="linenos"> 71</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer_photo</span><span class="p">(</span><span class="n">photo</span><span class="o">=</span><span class="n">FSInputFile</span><span class="p">(</span><span class="n">path_to_photo</span><span class="p">))</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span><span class="nd">@router</span><span class="o">.</span><span class="n">message</span><span class="p">()</span>
+<span class="linenos"> 75</span><span class="k">async</span> <span class="k">def</span> <span class="nf">handler_common</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">i18n</span><span class="p">:</span> <span class="n">I18nContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 76</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;i-dont-know&quot;</span><span class="p">))</span>
+<span class="linenos"> 77</span>    <span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;show-date&quot;</span><span class="p">,</span> <span class="n">date_</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">date</span><span class="p">))</span>
+<span class="linenos"> 78</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 81</span>    <span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="n">bot</span> <span class="o">=</span> <span class="n">Bot</span><span class="p">(</span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span> <span class="n">parse_mode</span><span class="o">=</span><span class="n">ParseMode</span><span class="o">.</span><span class="n">HTML</span><span class="p">)</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>    <span class="n">dp</span> <span class="o">=</span> <span class="n">Dispatcher</span><span class="p">()</span>
+<span class="linenos"> 85</span>    <span class="n">dp</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">router</span><span class="p">)</span>
+<span class="linenos"> 86</span>
+<span class="linenos"> 87</span>    <span class="c1"># создаем объект middleware пакета локализации aiogram_i18n</span>
+<span class="linenos"> 88</span>    <span class="n">i18n</span> <span class="o">=</span> <span class="n">I18nMiddleware</span><span class="p">(</span>
+<span class="linenos"> 89</span>        <span class="n">core</span><span class="o">=</span><span class="n">FluentRuntimeCore</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;locales/</span><span class="si">{locale}</span><span class="s2">/LC_MESSAGES&quot;</span><span class="p">),</span>
+<span class="linenos"> 90</span>        <span class="c1">#  передаем наш кастомный менеджер языка из middlewares/i18n_middleware.py:</span>
+<span class="linenos"> 91</span>        <span class="n">manager</span><span class="o">=</span><span class="n">i18n_middleware</span><span class="o">.</span><span class="n">UserManager</span><span class="p">(),</span>
+<span class="linenos"> 92</span>        <span class="n">default_locale</span><span class="o">=</span><span class="s2">&quot;en&quot;</span>
+<span class="linenos"> 93</span>        <span class="p">)</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span>  <span class="c1"># Регистрация мидлварей. Сначала регистрируется база данных, так как там хранится язык.</span>
+<span class="linenos"> 96</span>  <span class="n">dp</span><span class="o">.</span><span class="n">update</span><span class="o">.</span><span class="n">outer_middleware</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">db_middleware</span><span class="o">.</span><span class="n">DBMiddleware</span><span class="p">())</span>
+<span class="linenos"> 97</span>  <span class="n">i18n</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">dispatcher</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span>  <span class="k">await</span> <span class="n">dp</span><span class="o">.</span><span class="n">start_polling</span><span class="p">(</span><span class="n">bot</span><span class="p">)</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span>
+<span class="linenos">102</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">103</span>    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<p>Запускаем, тестируем.</p>
+</section>
+<section id="id2">
+<h2>Исправляем ошибки.<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>Наш проект серьезно усложнился и нужно произвести тестирование и
+отладку. Вот некоторые ошибки, которые часто возникают.</p>
+<p><strong>aiogram_i18n.exceptions.NoTranslateFileExistsError: files with
+extension (.ftl) in folder (locales/ru/LC_MESSAGES) not found</strong> — ошибка
+возникает когда файл перевода не найден по указанному нами пути.</p>
+<p><strong>KeyNotFoundError: Key ‘help’ not found</strong> — ошибка возникает,
+когда в коде есть ключ, а в переводе его нет. Например, вызываем
+<code class="docutils literal notranslate"><span class="pre">i18n.get(&quot;help&quot;)</span></code>, а такой строчки <code class="docutils literal notranslate"><span class="pre">help</span></code> нет в файле перевода
+соответствующего языка.</p>
+<p><strong>fluent.runtime.errors.FluentReferenceError: Unknown external: user</strong> —
+такая ошибка возникает, когда вы забываете передать в вызове функции
+основного кода нужный аргумент для ключа или просто имеет место опечатка в имени.
+В нашем случае разберем на примере опечатки в переменной <code class="docutils literal notranslate"><span class="pre">user</span></code>.
+Например, в переводе есть такое сообщение:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
+    У тебя в клиенте { -telegram(case: &quot;nominative&quot;) } { $language -&gt;
+    [None] не указан язык, поэтому все будет отображается на языке по-умолчанию.
+   *[any] указан язык { $language }, поэтому все будет отображается на этом языке.
+    }
+</pre></div>
+</div>
+<p>Здесь <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">-telegram</span> <span class="pre">}</span></code> – это термин. И он управляется
+конструкцией<code class="docutils literal notranslate"><span class="pre">(case:</span> <span class="pre">&quot;nominative&quot;)</span></code> только внутри языкового файла. А
+вот дальше используются аргументы <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$user</span> <span class="pre">}</span></code> и <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">$language</span> <span class="pre">}</span></code>,
+которые нужно передать из основного кода. Мы их передаем как именованные
+аргументы:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">locale</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>или еще возможен такой способ:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">hello</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">locale</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Так вот в случае, если мы неправильно указали аргумент в основном коде
+или вообще не указали, то во время компиляции перевода отсутствие аргумента и вызывает ошибку.
+Например <code class="docutils literal notranslate"><span class="pre">nmae</span></code> вместо <code class="docutils literal notranslate"><span class="pre">name</span></code> в строке:</p>
+<p>await message.answer(text=i18n.get(«hello», user= <strong>nmae</strong> , language=i18n.locale))</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="chapter_06.html" class="btn btn-neutral float-left" title="Глава 6. Локализация Aiogram с помощью проекта Fluent." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="chapter_08.html" class="btn btn-neutral float-right" title="Заключение и домашнее задание." accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Vergily. </p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
