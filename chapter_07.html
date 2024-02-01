@@ -357,171 +357,171 @@ Aiogram, не позволяют из коробки реализовать за
 <p>Английский перевод:</p>
 <div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">locales/en/LC_MESSAGES/messages.ftl</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span># This Source Code Form is subject to the terms of the Mozilla Public
-<span class="linenos"> 2</span># License, v. 2.0. If a copy of the MPL was not distributed with this
-<span class="linenos"> 3</span># file, You can obtain one at http://mozilla.org/MPL/2.0/.
-<span class="linenos"> 4</span># Это был пример лицензии
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm"># This Source Code Form is subject to the terms of the Mozilla Public</span>
+<span class="linenos"> 2</span><span class="cm"># License, v. 2.0. If a copy of the MPL was not distributed with this</span>
+<span class="linenos"> 3</span><span class="cm"># file, You can obtain one at http://mozilla.org/MPL/2.0/.</span>
+<span class="linenos"> 4</span><span class="cm"># Это был пример лицензии</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span>### Файл примера перевода на английский язык
-<span class="linenos"> 7</span>### Логика перевода изменится, не затрагивая код и другие переводы
-<span class="linenos"> 8</span>### С тройного шарпа начинается комментарий уровня файла
+<span class="linenos"> 6</span><span class="cm">### Файл примера перевода на английский язык</span>
+<span class="linenos"> 7</span><span class="cm">### Логика перевода изменится, не затрагивая код и другие переводы</span>
+<span class="linenos"> 8</span><span class="cm">### С тройного шарпа начинается комментарий уровня файла</span>
 <span class="linenos"> 9</span>
-<span class="linenos">10</span>## Это комментарий уровня группировки блоков в тексте. См. документацию Fluent.
-<span class="linenos">11</span>## Hello section
+<span class="linenos">10</span><span class="cm">## Это комментарий уровня группировки блоков в тексте. См. документацию Fluent.</span>
+<span class="linenos">11</span><span class="cm">## Hello section</span>
 <span class="linenos">12</span>
-<span class="linenos">13</span># Это пример термина. Термин начинается с дефиса.
-<span class="linenos">14</span># Посмотрите как это работало в русском переводе. Здесь же мы изменим логику.
-<span class="linenos">15</span># Падежи нам не нужны, но может потребоваться притяжательная форма
-<span class="linenos">16</span>-telegram = { $case -&gt;
-<span class="linenos">17</span>     *[common] Telegram
-<span class="linenos">18</span>      [possessive] Telegram&#39;s
-<span class="linenos">19</span>    }
+<span class="linenos">13</span><span class="cm"># Это пример термина. Термин начинается с дефиса.</span>
+<span class="linenos">14</span><span class="cm"># Посмотрите как это работало в русском переводе. Здесь же мы изменим логику.</span>
+<span class="linenos">15</span><span class="cm"># Падежи нам не нужны, но может потребоваться притяжательная форма</span>
+<span class="linenos">16</span><span class="p">-</span><span class="no">telegram</span><span class="p"> = { </span><span class="nv">$case</span><span class="p"> -&gt;</span>
+<span class="linenos">17</span><span class="p">     *[</span><span class="na">common</span><span class="p">] </span><span class="l">Telegram</span>
+<span class="linenos">18</span><span class="p">      [</span><span class="na">possessive</span><span class="p">] </span><span class="l">Telegram&#39;s</span>
+<span class="linenos">19</span><span class="p">    }</span>
 <span class="linenos">20</span>
-<span class="linenos">21</span># { $user } - user name, { $language } - language code.
-<span class="linenos">22</span># Это было описание переменных, которые попадают сюда из основного кода приложения.
-<span class="linenos">23</span># Термин мы берем из этого же файла перевода,
-<span class="linenos">24</span># и вставляем с параметром нужного контекста использования (в нашем случае падежа).
-<span class="linenos">25</span>hello = Hi, &lt;b&gt;{ $user }&lt;/b&gt;!
-<span class="linenos">26</span>    { $language -&gt;
-<span class="linenos">27</span>     [None] In your { -telegram(case: &quot;common&quot;) } client a language isn&#39;t set.
-<span class="linenos">28</span>            Therefore, everything will be displayed in default language.
-<span class="linenos">29</span>    *[any] Your Telegram client is set to { $language }.
-<span class="linenos">30</span>            Therefore, everything will be displayed in this language.
-<span class="linenos">31</span>    }
+<span class="linenos">21</span><span class="cm"># { $user } - user name, { $language } - language code.</span>
+<span class="linenos">22</span><span class="cm"># Это было описание переменных, которые попадают сюда из основного кода приложения.</span>
+<span class="linenos">23</span><span class="cm"># Термин мы берем из этого же файла перевода,</span>
+<span class="linenos">24</span><span class="cm"># и вставляем с параметром нужного контекста использования (в нашем случае падежа).</span>
+<span class="linenos">25</span><span class="no">hello</span><span class="p"> = </span><span class="l">Hi, &lt;b&gt;</span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l">&lt;/b&gt;!</span>
+<span class="linenos">26</span><span class="l">    </span><span class="p">{ </span><span class="nv">$language</span><span class="p"> -&gt;</span>
+<span class="linenos">27</span><span class="p">     [</span><span class="na">None</span><span class="p">] </span><span class="l">In your </span><span class="p">{ -</span><span class="no">telegram</span><span class="p">(</span><span class="no">case</span><span class="p">: </span><span class="s">&quot;common&quot;</span><span class="p">) }</span><span class="l"> client a language isn&#39;t set.</span>
+<span class="linenos">28</span><span class="l">            Therefore, everything will be displayed in default language.</span>
+<span class="linenos">29</span><span class="p">    *[</span><span class="na">any</span><span class="p">] </span><span class="l">Your Telegram client is set to </span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">.</span>
+<span class="linenos">30</span><span class="l">            Therefore, everything will be displayed in this language.</span>
+<span class="linenos">31</span><span class="p">    }</span>
 <span class="linenos">32</span>
-<span class="linenos">33</span>help = { $case -&gt;
-<span class="linenos">34</span>    *[capital] Help
-<span class="linenos">35</span>     [lower] help
-<span class="linenos">36</span>    }
-<span class="linenos">37</span>help-message =
-<span class="linenos">38</span>    &lt;b&gt;Welcome to the bot.&lt;/b&gt;
-<span class="linenos">39</span>    Our bot can&#39;t do anything useful, but it can switch languages with dexterity.
+<span class="linenos">33</span><span class="no">help</span><span class="p"> = { </span><span class="nv">$case</span><span class="p"> -&gt;</span>
+<span class="linenos">34</span><span class="p">    *[</span><span class="na">capital</span><span class="p">] </span><span class="l">Help</span>
+<span class="linenos">35</span><span class="p">     [</span><span class="na">lower</span><span class="p">] </span><span class="l">help</span>
+<span class="linenos">36</span><span class="p">    }</span>
+<span class="linenos">37</span><span class="no">help-message</span><span class="p"> =</span>
+<span class="linenos">38</span><span class="p">    </span><span class="l">&lt;b&gt;Welcome to the bot.&lt;/b&gt;</span>
+<span class="linenos">39</span><span class="l">    Our bot can&#39;t do anything useful, but it can switch languages with dexterity.</span>
 <span class="linenos">40</span>
-<span class="linenos">41</span>    The following commands are available in the bot:
-<span class="linenos">42</span>    /start to start working with the bot.
-<span class="linenos">43</span>    /help or just send the word &lt;b&gt;&lt;i&gt;help&lt;/i&gt;&lt;/b&gt; to show this message.
-<span class="linenos">44</span>    /language_en { switch-to-en }
-<span class="linenos">45</span>    /language_ru { switch-to-ru }
-<span class="linenos">46</span>    /photo or just send the word &lt;b&gt;&lt;i&gt;photo&lt;/i&gt;&lt;/b&gt; to send photo to you.
+<span class="linenos">41</span><span class="l">    The following commands are available in the bot:</span>
+<span class="linenos">42</span><span class="l">    /start to start working with the bot.</span>
+<span class="linenos">43</span><span class="l">    /help or just send the word &lt;b&gt;&lt;i&gt;help&lt;/i&gt;&lt;/b&gt; to show this message.</span>
+<span class="linenos">44</span><span class="l">    /language_en </span><span class="p">{ </span><span class="no">switch-to-en</span><span class="p"> }</span>
+<span class="linenos">45</span><span class="l">    /language_ru </span><span class="p">{ </span><span class="no">switch-to-ru</span><span class="p"> }</span>
+<span class="linenos">46</span><span class="l">    /photo or just send the word &lt;b&gt;&lt;i&gt;photo&lt;/i&gt;&lt;/b&gt; to send photo to you.</span>
 <span class="linenos">47</span>
 <span class="linenos">48</span>
-<span class="linenos">49</span># { $language } - language code.
-<span class="linenos">50</span># The current language is { $language }.
-<span class="linenos">51</span>cur-lang = The current language is: &lt;i&gt;{ $language }&lt;/i&gt;
+<span class="linenos">49</span><span class="cm"># { $language } - language code.</span>
+<span class="linenos">50</span><span class="cm"># The current language is { $language }.</span>
+<span class="linenos">51</span><span class="no">cur-lang</span><span class="p"> = </span><span class="l">The current language is: &lt;i&gt;</span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">&lt;/i&gt;</span>
 <span class="linenos">52</span>
-<span class="linenos">53</span>## Switch language section
+<span class="linenos">53</span><span class="cm">## Switch language section</span>
 <span class="linenos">54</span>
-<span class="linenos">55</span># Название языка мы отображаем на родном языке, чтоб человек
-<span class="linenos">56</span># увидел знакомые буквы и понял, что не все потеряно.
-<span class="linenos">57</span>en-lang = English
-<span class="linenos">58</span>ru-lang = Русский
-<span class="linenos">59</span>switch-to-en = Switch the interface to { en-lang }.
-<span class="linenos">60</span>switch-to-ru = Switch the interface to { ru-lang }.
-<span class="linenos">61</span>lang-is-switched = Display language is { en-lang }.
+<span class="linenos">55</span><span class="cm"># Название языка мы отображаем на родном языке, чтоб человек</span>
+<span class="linenos">56</span><span class="cm"># увидел знакомые буквы и понял, что не все потеряно.</span>
+<span class="linenos">57</span><span class="no">en-lang</span><span class="p"> = </span><span class="l">English</span>
+<span class="linenos">58</span><span class="no">ru-lang</span><span class="p"> = </span><span class="l">Русский</span>
+<span class="linenos">59</span><span class="no">switch-to-en</span><span class="p"> = </span><span class="l">Switch the interface to </span><span class="p">{ </span><span class="no">en-lang</span><span class="p"> }</span><span class="l">.</span>
+<span class="linenos">60</span><span class="no">switch-to-ru</span><span class="p"> = </span><span class="l">Switch the interface to </span><span class="p">{ </span><span class="no">ru-lang</span><span class="p"> }</span><span class="l">.</span>
+<span class="linenos">61</span><span class="no">lang-is-switched</span><span class="p"> = </span><span class="l">Display language is </span><span class="p">{ </span><span class="no">en-lang</span><span class="p"> }</span><span class="l">.</span>
 <span class="linenos">62</span>
-<span class="linenos">63</span>photo = photo
+<span class="linenos">63</span><span class="no">photo</span><span class="p"> = </span><span class="l">photo</span>
 <span class="linenos">64</span>
-<span class="linenos">65</span>## Common messages section
+<span class="linenos">65</span><span class="cm">## Common messages section</span>
 <span class="linenos">66</span>
-<span class="linenos">67</span>i-dont-know = I&#39;m so stupid bot. Make me clever.
-<span class="linenos">68</span>show-date = But look! Pretty date on English: { DATETIME
-<span class="linenos">69</span>   ($date_, month: &quot;long&quot;, year: &quot;numeric&quot;, day: &quot;numeric&quot;, weekday: &quot;long&quot;)
-<span class="linenos">70</span>   }
+<span class="linenos">67</span><span class="no">i-dont-know</span><span class="p"> = </span><span class="l">I&#39;m so stupid bot. Make me clever.</span>
+<span class="linenos">68</span><span class="no">show-date</span><span class="p"> = </span><span class="l">But look! Pretty date on English: </span><span class="p">{ </span><span class="no">DATETIME</span>
+<span class="linenos">69</span><span class="p">   (</span><span class="nv">$date_</span><span class="p">, </span><span class="no">month</span><span class="p">: </span><span class="s">&quot;long&quot;</span><span class="p">, </span><span class="no">year</span><span class="p">: </span><span class="s">&quot;numeric&quot;</span><span class="p">, </span><span class="no">day</span><span class="p">: </span><span class="s">&quot;numeric&quot;</span><span class="p">, </span><span class="no">weekday</span><span class="p">: </span><span class="s">&quot;long&quot;</span><span class="p">)</span>
+<span class="linenos">70</span><span class="p">   }</span>
 </pre></div>
 </div>
 </div>
 <p>Русский перевод:</p>
 <div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">locales/ru/LC_MESSAGES/messages.ftl</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span># This Source Code Form is subject to the terms of the Mozilla Public
-<span class="linenos"> 2</span># License, v. 2.0. If a copy of the MPL was not distributed with this
-<span class="linenos"> 3</span># file, You can obtain one at http://mozilla.org/MPL/2.0/.
-<span class="linenos"> 4</span># Это был пример лицензии
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm"># This Source Code Form is subject to the terms of the Mozilla Public</span>
+<span class="linenos"> 2</span><span class="cm"># License, v. 2.0. If a copy of the MPL was not distributed with this</span>
+<span class="linenos"> 3</span><span class="cm"># file, You can obtain one at http://mozilla.org/MPL/2.0/.</span>
+<span class="linenos"> 4</span><span class="cm"># Это был пример лицензии</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span>### Файл примера перевода на русский язык
-<span class="linenos"> 7</span>### Важно. Не забудь полить помидоры...
-<span class="linenos"> 8</span>### С тройного шарпа начинается комментарий уровня файла
+<span class="linenos"> 6</span><span class="cm">### Файл примера перевода на русский язык</span>
+<span class="linenos"> 7</span><span class="cm">### Важно. Не забудь полить помидоры...</span>
+<span class="linenos"> 8</span><span class="cm">### С тройного шарпа начинается комментарий уровня файла</span>
 <span class="linenos"> 9</span>
-<span class="linenos">10</span>## Это комментарий уровня группировки блоков в тексте. См. документацию.
-<span class="linenos">11</span>## Hello section
+<span class="linenos">10</span><span class="cm">## Это комментарий уровня группировки блоков в тексте. См. документацию.</span>
+<span class="linenos">11</span><span class="cm">## Hello section</span>
 <span class="linenos">12</span>
-<span class="linenos">13</span># Это пример термина. Термин начинается с дефиса.
-<span class="linenos">14</span># Термины можно передавать внутри сообщений, указывая переменные для параметризации в скобках.
-<span class="linenos">15</span># То есть это как атрибуты, но мы их задаем в тексте переводов, а не получаем извне.
-<span class="linenos">16</span># Мы будем издеваться над языком, чтобы увидеть как и что работает
-<span class="linenos">17</span>-telegram = {$case -&gt;
-<span class="linenos">18</span>    *[nominative] Телеграм {&quot;{&quot;}Telegram{&quot;}&quot;}
-<span class="linenos">19</span>     [genitive] Телеграма ({&quot;{&quot;}Telegram&#39;а{&quot;}&quot;})
-<span class="linenos">20</span>     [dative] Телеграму ({&quot;{&quot;}Telegram&#39;у{&quot;}&quot;})
-<span class="linenos">21</span>     [accusative] Телеграм ({&quot;{&quot;}Telegram{&quot;}&quot;})
-<span class="linenos">22</span>     [instrumental] Телеграмом ({&quot;{&quot;}Telegram&#39;ом{&quot;}&quot;})
-<span class="linenos">23</span>     [prepositional] Телеграме ({&quot;{&quot;}Telegram&#39;е{&quot;}&quot;})
-<span class="linenos">24</span>    }
-<span class="linenos">25</span># {&quot;}&quot;}  это пример экранированного символа.
-<span class="linenos">26</span># Падежи
-<span class="linenos">27</span># nominative - именительный
-<span class="linenos">28</span># genitive - родительный
-<span class="linenos">29</span># dative - дательный
-<span class="linenos">30</span># accusative - винительный
-<span class="linenos">31</span># instrumental творительный.
-<span class="linenos">32</span># prepositional - предложный
+<span class="linenos">13</span><span class="cm"># Это пример термина. Термин начинается с дефиса.</span>
+<span class="linenos">14</span><span class="cm"># Термины можно передавать внутри сообщений, указывая переменные для параметризации в скобках.</span>
+<span class="linenos">15</span><span class="cm"># То есть это как атрибуты, но мы их задаем в тексте переводов, а не получаем извне.</span>
+<span class="linenos">16</span><span class="cm"># Мы будем издеваться над языком, чтобы увидеть как и что работает</span>
+<span class="linenos">17</span><span class="p">-</span><span class="no">telegram</span><span class="p"> = {</span><span class="nv">$case</span><span class="p"> -&gt;</span>
+<span class="linenos">18</span><span class="p">    *[</span><span class="na">nominative</span><span class="p">] </span><span class="l">Телеграм </span><span class="p">{</span><span class="s">&quot;{&quot;</span><span class="p">}</span><span class="l">Telegram</span><span class="p">{</span><span class="s">&quot;}&quot;</span><span class="p">}</span>
+<span class="linenos">19</span><span class="p">     [</span><span class="na">genitive</span><span class="p">] </span><span class="l">Телеграма (</span><span class="p">{</span><span class="s">&quot;{&quot;</span><span class="p">}</span><span class="l">Telegram&#39;а</span><span class="p">{</span><span class="s">&quot;}&quot;</span><span class="p">}</span><span class="l">)</span>
+<span class="linenos">20</span><span class="p">     [</span><span class="na">dative</span><span class="p">] </span><span class="l">Телеграму (</span><span class="p">{</span><span class="s">&quot;{&quot;</span><span class="p">}</span><span class="l">Telegram&#39;у</span><span class="p">{</span><span class="s">&quot;}&quot;</span><span class="p">}</span><span class="l">)</span>
+<span class="linenos">21</span><span class="p">     [</span><span class="na">accusative</span><span class="p">] </span><span class="l">Телеграм (</span><span class="p">{</span><span class="s">&quot;{&quot;</span><span class="p">}</span><span class="l">Telegram</span><span class="p">{</span><span class="s">&quot;}&quot;</span><span class="p">}</span><span class="l">)</span>
+<span class="linenos">22</span><span class="p">     [</span><span class="na">instrumental</span><span class="p">] </span><span class="l">Телеграмом (</span><span class="p">{</span><span class="s">&quot;{&quot;</span><span class="p">}</span><span class="l">Telegram&#39;ом</span><span class="p">{</span><span class="s">&quot;}&quot;</span><span class="p">}</span><span class="l">)</span>
+<span class="linenos">23</span><span class="p">     [</span><span class="na">prepositional</span><span class="p">] </span><span class="l">Телеграме (</span><span class="p">{</span><span class="s">&quot;{&quot;</span><span class="p">}</span><span class="l">Telegram&#39;е</span><span class="p">{</span><span class="s">&quot;}&quot;</span><span class="p">}</span><span class="l">)</span>
+<span class="linenos">24</span><span class="p">    }</span>
+<span class="linenos">25</span><span class="cm"># {&quot;}&quot;}  это пример экранированного символа.</span>
+<span class="linenos">26</span><span class="cm"># Падежи</span>
+<span class="linenos">27</span><span class="cm"># nominative - именительный</span>
+<span class="linenos">28</span><span class="cm"># genitive - родительный</span>
+<span class="linenos">29</span><span class="cm"># dative - дательный</span>
+<span class="linenos">30</span><span class="cm"># accusative - винительный</span>
+<span class="linenos">31</span><span class="cm"># instrumental творительный.</span>
+<span class="linenos">32</span><span class="cm"># prepositional - предложный</span>
 <span class="linenos">33</span>
-<span class="linenos">34</span># { $user } - user name, { $language } - language code.
-<span class="linenos">35</span># Это было описание переменных, которые попадают сюда из основного кода приложения.
-<span class="linenos">36</span># Термин мы берем из этого же файла перевода,
-<span class="linenos">37</span># и вставляем с параметром нужного контекста использования (в нашем случае падежа).
-<span class="linenos">38</span>hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
-<span class="linenos">39</span>        У тебя в клиенте { -telegram(case: &quot;nominative&quot;) } { $language -&gt;
-<span class="linenos">40</span>     [None] не указан язык, поэтому все будет отображается на языке по-умолчанию.
-<span class="linenos">41</span>    *[any] указан язык { $language }, поэтому все будет отображается на этом языке.
-<span class="linenos">42</span>    }
+<span class="linenos">34</span><span class="cm"># { $user } - user name, { $language } - language code.</span>
+<span class="linenos">35</span><span class="cm"># Это было описание переменных, которые попадают сюда из основного кода приложения.</span>
+<span class="linenos">36</span><span class="cm"># Термин мы берем из этого же файла перевода,</span>
+<span class="linenos">37</span><span class="cm"># и вставляем с параметром нужного контекста использования (в нашем случае падежа).</span>
+<span class="linenos">38</span><span class="no">hello</span><span class="p"> = </span><span class="l">Привет, &lt;b&gt;</span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l">&lt;/b&gt;!</span>
+<span class="linenos">39</span><span class="l">        У тебя в клиенте </span><span class="p">{ -</span><span class="no">telegram</span><span class="p">(</span><span class="no">case</span><span class="p">: </span><span class="s">&quot;nominative&quot;</span><span class="p">) }</span><span class="l"> </span><span class="p">{ </span><span class="nv">$language</span><span class="p"> -&gt;</span>
+<span class="linenos">40</span><span class="p">     [</span><span class="na">None</span><span class="p">] </span><span class="l">не указан язык, поэтому все будет отображается на языке по-умолчанию.</span>
+<span class="linenos">41</span><span class="p">    *[</span><span class="na">any</span><span class="p">] </span><span class="l">указан язык </span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">, поэтому все будет отображается на этом языке.</span>
+<span class="linenos">42</span><span class="p">    }</span>
 <span class="linenos">43</span>
-<span class="linenos">44</span># а так мы вставляем символы unicode по номеру \uHHHH. Например,
-<span class="linenos">45</span># tears-of-joy1 = {&quot;\U01F602&quot;}
-<span class="linenos">46</span># tears-of-joy2 = 😂
+<span class="linenos">44</span><span class="cm"># а так мы вставляем символы unicode по номеру \uHHHH. Например,</span>
+<span class="linenos">45</span><span class="cm"># tears-of-joy1 = {&quot;\U01F602&quot;}</span>
+<span class="linenos">46</span><span class="cm"># tears-of-joy2 = 😂</span>
 <span class="linenos">47</span>
-<span class="linenos">48</span>help = { $case -&gt;
-<span class="linenos">49</span>    *[capital] Помощь
-<span class="linenos">50</span>     [lower] помощь
-<span class="linenos">51</span>    }
+<span class="linenos">48</span><span class="no">help</span><span class="p"> = { </span><span class="nv">$case</span><span class="p"> -&gt;</span>
+<span class="linenos">49</span><span class="p">    *[</span><span class="na">capital</span><span class="p">] </span><span class="l">Помощь</span>
+<span class="linenos">50</span><span class="p">     [</span><span class="na">lower</span><span class="p">] </span><span class="l">помощь</span>
+<span class="linenos">51</span><span class="p">    }</span>
 <span class="linenos">52</span>
-<span class="linenos">53</span>help-message =
-<span class="linenos">54</span>    &lt;b&gt;Добро пожаловать в бота.&lt;/b&gt;
-<span class="linenos">55</span>    Наш бот не умеет ничего полезного, однако с ловкостью может переключать язык.
+<span class="linenos">53</span><span class="no">help-message</span><span class="p"> =</span>
+<span class="linenos">54</span><span class="p">    </span><span class="l">&lt;b&gt;Добро пожаловать в бота.&lt;/b&gt;</span>
+<span class="linenos">55</span><span class="l">    Наш бот не умеет ничего полезного, однако с ловкостью может переключать язык.</span>
 <span class="linenos">56</span>
-<span class="linenos">57</span>    В боте доступны следующие команды:
-<span class="linenos">58</span>    /start чтобы начать работать с ботом
-<span class="linenos">59</span>    /help или просто отправьте слово &lt;b&gt;&lt;i&gt;помощь&lt;/i&gt;&lt;/b&gt;, чтобы показать это сообщение
-<span class="linenos">60</span>    /language_en { switch-to-en }
-<span class="linenos">61</span>    /language_ru { switch-to-ru }
-<span class="linenos">62</span>    /photo или просто отправьте слово &lt;b&gt;&lt;i&gt;фото&lt;/i&gt;&lt;/b&gt;, чтобы прислать вам картинку
+<span class="linenos">57</span><span class="l">    В боте доступны следующие команды:</span>
+<span class="linenos">58</span><span class="l">    /start чтобы начать работать с ботом</span>
+<span class="linenos">59</span><span class="l">    /help или просто отправьте слово &lt;b&gt;&lt;i&gt;помощь&lt;/i&gt;&lt;/b&gt;, чтобы показать это сообщение</span>
+<span class="linenos">60</span><span class="l">    /language_en </span><span class="p">{ </span><span class="no">switch-to-en</span><span class="p"> }</span>
+<span class="linenos">61</span><span class="l">    /language_ru </span><span class="p">{ </span><span class="no">switch-to-ru</span><span class="p"> }</span>
+<span class="linenos">62</span><span class="l">    /photo или просто отправьте слово &lt;b&gt;&lt;i&gt;фото&lt;/i&gt;&lt;/b&gt;, чтобы прислать вам картинку</span>
 <span class="linenos">63</span>
 <span class="linenos">64</span>
-<span class="linenos">65</span># Это комментарий подсказка для переводчиков (чтобы не искать что значат эти переменные в коде,
-<span class="linenos">66</span># который не факт ,что они получат, а если и получат, то не поймут:
+<span class="linenos">65</span><span class="cm"># Это комментарий подсказка для переводчиков (чтобы не искать что значат эти переменные в коде,</span>
+<span class="linenos">66</span><span class="cm"># который не факт ,что они получат, а если и получат, то не поймут:</span>
 <span class="linenos">67</span>
-<span class="linenos">68</span># { $language } - language code.
-<span class="linenos">69</span># The current language is { $language }.
-<span class="linenos">70</span>cur-lang = Текущий язык: &lt;i&gt;{ $language }&lt;/i&gt;
+<span class="linenos">68</span><span class="cm"># { $language } - language code.</span>
+<span class="linenos">69</span><span class="cm"># The current language is { $language }.</span>
+<span class="linenos">70</span><span class="no">cur-lang</span><span class="p"> = </span><span class="l">Текущий язык: &lt;i&gt;</span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">&lt;/i&gt;</span>
 <span class="linenos">71</span>
-<span class="linenos">72</span>## Switch language section
+<span class="linenos">72</span><span class="cm">## Switch language section</span>
 <span class="linenos">73</span>
-<span class="linenos">74</span>en-lang = English
-<span class="linenos">75</span>ru-lang = Русский
-<span class="linenos">76</span>switch-to-en = Переключить интерфейс на { en-lang } язык.
+<span class="linenos">74</span><span class="no">en-lang</span><span class="p"> = </span><span class="l">English</span>
+<span class="linenos">75</span><span class="no">ru-lang</span><span class="p"> = </span><span class="l">Русский</span>
+<span class="linenos">76</span><span class="no">switch-to-en</span><span class="p"> = </span><span class="l">Переключить интерфейс на </span><span class="p">{ </span><span class="no">en-lang</span><span class="p"> }</span><span class="l"> язык.</span>
 <span class="linenos">77</span>
-<span class="linenos">78</span># В фигурных скобках пример интерполяции одного сообщения в другом.
-<span class="linenos">79</span>switch-to-ru = Переключить интерфейс на { ru-lang } язык.
-<span class="linenos">80</span>lang-is-switched = Язык переключен на { ru-lang }.
+<span class="linenos">78</span><span class="cm"># В фигурных скобках пример интерполяции одного сообщения в другом.</span>
+<span class="linenos">79</span><span class="no">switch-to-ru</span><span class="p"> = </span><span class="l">Переключить интерфейс на </span><span class="p">{ </span><span class="no">ru-lang</span><span class="p"> }</span><span class="l"> язык.</span>
+<span class="linenos">80</span><span class="no">lang-is-switched</span><span class="p"> = </span><span class="l">Язык переключен на </span><span class="p">{ </span><span class="no">ru-lang</span><span class="p"> }</span><span class="l">.</span>
 <span class="linenos">81</span>
-<span class="linenos">82</span>photo = фото
+<span class="linenos">82</span><span class="no">photo</span><span class="p"> = </span><span class="l">фото</span>
 <span class="linenos">83</span>
-<span class="linenos">84</span>## Common messages section
+<span class="linenos">84</span><span class="cm">## Common messages section</span>
 <span class="linenos">85</span>
-<span class="linenos">86</span>i-dont-know = Я тупой бот. Сделай меня умным.
-<span class="linenos">87</span>show-date = Но посмотри! Красивая дата по правилам Русского языка: {
-<span class="linenos">88</span>   DATETIME($date_, month: &quot;long&quot;, year: &quot;numeric&quot;, day: &quot;numeric&quot;, weekday: &quot;long&quot;)
-<span class="linenos">89</span>   }
+<span class="linenos">86</span><span class="no">i-dont-know</span><span class="p"> = </span><span class="l">Я тупой бот. Сделай меня умным.</span>
+<span class="linenos">87</span><span class="no">show-date</span><span class="p"> = </span><span class="l">Но посмотри! Красивая дата по правилам Русского языка: </span><span class="p">{</span>
+<span class="linenos">88</span><span class="p">   </span><span class="no">DATETIME</span><span class="p">(</span><span class="nv">$date_</span><span class="p">, </span><span class="no">month</span><span class="p">: </span><span class="s">&quot;long&quot;</span><span class="p">, </span><span class="no">year</span><span class="p">: </span><span class="s">&quot;numeric&quot;</span><span class="p">, </span><span class="no">day</span><span class="p">: </span><span class="s">&quot;numeric&quot;</span><span class="p">, </span><span class="no">weekday</span><span class="p">: </span><span class="s">&quot;long&quot;</span><span class="p">)</span>
+<span class="linenos">89</span><span class="p">   }</span>
 </pre></div>
 </div>
 </div>
@@ -652,11 +652,11 @@ extension (.ftl) in folder (locales/ru/LC_MESSAGES) not found</strong> — ош�
 основного кода нужный аргумент для ключа или просто имеет место опечатка в имени.
 В нашем случае разберем на примере опечатки в переменной <code class="docutils literal notranslate"><span class="pre">user</span></code>.
 Например, в переводе есть такое сообщение:</p>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
-    У тебя в клиенте { -telegram(case: &quot;nominative&quot;) } { $language -&gt;
-    [None] не указан язык, поэтому все будет отображается на языке по-умолчанию.
-   *[any] указан язык { $language }, поэтому все будет отображается на этом языке.
-    }
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="no">hello</span><span class="p"> = </span><span class="l">Привет, &lt;b&gt;</span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l">&lt;/b&gt;!</span>
+<span class="l">    У тебя в клиенте </span><span class="p">{ -</span><span class="no">telegram</span><span class="p">(</span><span class="no">case</span><span class="p">: </span><span class="s">&quot;nominative&quot;</span><span class="p">) }</span><span class="l"> </span><span class="p">{ </span><span class="nv">$language</span><span class="p"> -&gt;</span>
+<span class="p">    [</span><span class="na">None</span><span class="p">] </span><span class="l">не указан язык, поэтому все будет отображается на языке по-умолчанию.</span>
+<span class="p">   *[</span><span class="na">any</span><span class="p">] </span><span class="l">указан язык </span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">, поэтому все будет отображается на этом языке.</span>
+<span class="p">    }</span>
 </pre></div>
 </div>
 <p>Здесь <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">-telegram</span> <span class="pre">}</span></code> – это термин. И он управляется

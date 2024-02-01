@@ -104,17 +104,17 @@
 <code class="docutils literal notranslate"><span class="pre">идентификатор</span> <span class="pre">=</span> <span class="pre">перевод</span></code>. В синтаксисе идентификаторов используется <code class="docutils literal notranslate"><span class="pre">kebab-case</span></code>. Пример:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span># Это комментарий
-# Ниже идет сообщение
-Hello = Привет
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="cm"># Это комментарий</span>
+<span class="cm"># Ниже идет сообщение</span>
+<span class="no">Hello</span><span class="p"> = </span><span class="l">Привет</span>
 
-# Это пример многострочного сообщения, отступы обязательны.
-# Длинные идентификаторы пишутся через дефис. Можно включать другие сообщения
-long-message = { Hello }, это
-    многострочное сообщение.
-    Продолжение начинается с отступа.
-    Отступ может быть только пробелом.
-    Табуляция не считается отступом.
+<span class="cm"># Это пример многострочного сообщения, отступы обязательны.</span>
+<span class="cm"># Длинные идентификаторы пишутся через дефис. Можно включать другие сообщения</span>
+<span class="no">long-message</span><span class="p"> = { </span><span class="no">Hello</span><span class="p"> }</span><span class="l">, это</span>
+<span class="l">    многострочное сообщение.</span>
+<span class="l">    Продолжение начинается с отступа.</span>
+<span class="l">    Отступ может быть только пробелом.</span>
+<span class="l">    Табуляция не считается отступом.</span>
 </pre></div>
 </div>
 </div>
@@ -155,16 +155,16 @@ long-message = { Hello }, это
 <p>А в нашем файле перевода добавим эти переменные в нужное место:</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">locales/ru/LC_MESSAGES/my-super-bot.ftl</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="hll">hello = Привет, &lt;b&gt;{ $user }&lt;/b&gt;!
-</span><span class="hll">cur-lang = Текущий язык : &lt;i&gt;{ $language }&lt;/i&gt;
-</span>help = Помощь
-<span class="hll">you-have-coin = У пользователя { $user } { $value -&gt;
-</span>        [0] совсем нет монет
-        [one] имеется одна монета
-<span class="hll">        [few] { $value } монеты
-</span><span class="hll">        *[many] есть { $value } монет
-</span>    }!
-enter-a-number = введите число
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="no">hello</span><span class="p"> = </span><span class="l">Привет, &lt;b&gt;</span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l">&lt;/b&gt;!</span>
+</span><span class="hll"><span class="no">cur-lang</span><span class="p"> = </span><span class="l">Текущий язык : &lt;i&gt;</span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">&lt;/i&gt;</span>
+</span><span class="no">help</span><span class="p"> = </span><span class="l">Помощь</span>
+<span class="hll"><span class="no">you-have-coin</span><span class="p"> = </span><span class="l">У пользователя </span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l"> </span><span class="p">{ </span><span class="nv">$value</span><span class="p"> -&gt;</span>
+</span><span class="p">        [</span><span class="na">0</span><span class="p">] </span><span class="l">совсем нет монет</span>
+<span class="p">        [</span><span class="na">one</span><span class="p">] </span><span class="l">имеется одна монета</span>
+<span class="hll"><span class="p">        [</span><span class="na">few</span><span class="p">] { </span><span class="nv">$value</span><span class="p"> }</span><span class="l"> монеты</span>
+</span><span class="hll"><span class="p">        *[</span><span class="na">many</span><span class="p">] </span><span class="l">есть </span><span class="p">{ </span><span class="nv">$value</span><span class="p"> }</span><span class="l"> монет</span>
+</span><span class="p">    }</span><span class="l">!</span>
+<span class="no">enter-a-number</span><span class="p"> = </span><span class="l">введите число</span>
 </pre></div>
 </div>
 </div>
@@ -195,15 +195,15 @@ enter-a-number = введите число
 <p>Текст перевода для английского:</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">locales/en/LC_MESSAGES/my-super-bot.ftl</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="hll">hello = Hello, &lt;b&gt;{ $user }&lt;/b&gt;!
-</span><span class="hll">cur-lang = Your current language: &lt;i&gt;{ $language }&lt;/i&gt;
-</span>help = Help
-<span class="hll">you-have-coin = The user { $user } { $value -&gt;
-</span>        [zero] hasn&#39;t got nothing
-        [one] have one coin
-<span class="hll">       *[many] has { $value } coins
-</span>    }!
-enter-a-number = Input a number, please.
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="no">hello</span><span class="p"> = </span><span class="l">Hello, &lt;b&gt;</span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l">&lt;/b&gt;!</span>
+</span><span class="hll"><span class="no">cur-lang</span><span class="p"> = </span><span class="l">Your current language: &lt;i&gt;</span><span class="p">{ </span><span class="nv">$language</span><span class="p"> }</span><span class="l">&lt;/i&gt;</span>
+</span><span class="no">help</span><span class="p"> = </span><span class="l">Help</span>
+<span class="hll"><span class="no">you-have-coin</span><span class="p"> = </span><span class="l">The user </span><span class="p">{ </span><span class="nv">$user</span><span class="p"> }</span><span class="l"> </span><span class="p">{ </span><span class="nv">$value</span><span class="p"> -&gt;</span>
+</span><span class="p">        [</span><span class="na">zero</span><span class="p">] </span><span class="l">hasn&#39;t got nothing</span>
+<span class="p">        [</span><span class="na">one</span><span class="p">] </span><span class="l">have one coin</span>
+<span class="hll"><span class="p">       *[</span><span class="na">many</span><span class="p">] </span><span class="l">has </span><span class="p">{ </span><span class="nv">$value</span><span class="p"> }</span><span class="l"> coins</span>
+</span><span class="p">    }</span><span class="l">!</span>
+<span class="no">enter-a-number</span><span class="p"> = </span><span class="l">Input a number, please.</span>
 </pre></div>
 </div>
 </div>
@@ -230,11 +230,11 @@ enter-a-number = Input a number, please.
 документации:</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>your-score =
-    { NUMBER($score, minimumFractionDigits: 1) -&gt;
-        [0.0]   You scored zero points. What happened?
-       *[other] You scored { NUMBER($score, minimumFractionDigits: 1) } points.
-    }
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="no">your-score</span><span class="p"> =</span>
+<span class="p">    { </span><span class="no">NUMBER</span><span class="p">(</span><span class="nv">$score</span><span class="p">, </span><span class="no">minimumFractionDigits</span><span class="p">: </span><span class="m">1</span><span class="p">) -&gt;</span>
+<span class="p">        [</span><span class="na">0.0</span><span class="p">]   </span><span class="l">You scored zero points. What happened?</span>
+<span class="p">       *[</span><span class="na">other</span><span class="p">] </span><span class="l">You scored </span><span class="p">{ </span><span class="no">NUMBER</span><span class="p">(</span><span class="nv">$score</span><span class="p">, </span><span class="no">minimumFractionDigits</span><span class="p">: </span><span class="m">1</span><span class="p">) }</span><span class="l"> points.</span>
+<span class="p">    }</span>
 </pre></div>
 </div>
 </div>
@@ -246,19 +246,19 @@ enter-a-number = Input a number, please.
 <em>«Вася ответил(а) на ваше сообщение»</em>.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>mention = { $mention-user } ответил(а) на ваше сообщение.
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="no">mention</span><span class="p"> = { </span><span class="nv">$mention-user</span><span class="p"> }</span><span class="l"> ответил(а) на ваше сообщение.</span>
 </pre></div>
 </div>
 </div>
 <p>Преобразуем это в человеческий вид:</p>
 <div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>mention =
-  { $mention-user } { $user-gender -&gt;
-    [male]  ответил
-<span class="hll">    [female] ответила
-</span>    *[other] ответил(а)
-  }  на ваше сообщение.
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="no">mention</span><span class="p"> =</span>
+<span class="p">  { </span><span class="nv">$mention-user</span><span class="p"> }</span><span class="l"> </span><span class="p">{ </span><span class="nv">$user-gender</span><span class="p"> -&gt;</span>
+<span class="p">    [</span><span class="na">male</span><span class="p">]  </span><span class="l">ответил</span>
+<span class="hll"><span class="p">    [</span><span class="na">female</span><span class="p">] </span><span class="l">ответила</span>
+</span><span class="p">    *[</span><span class="na">other</span><span class="p">] </span><span class="l">ответил(а)</span>
+<span class="p">  }</span><span class="l">  на ваше сообщение.</span>
 </pre></div>
 </div>
 </div>
@@ -284,13 +284,13 @@ enter-a-number = Input a number, please.
 параметра, доступные внутри термина, определены в скобках, например:</p>
 <div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>-brand-name =⠀
-  { $case -&gt;
-    *[nominative] Aiogram
-    [prepositional] Aiogram’е
-  }
-about = Информация об { -brand-name(case: &quot;prepositional&quot;) }.
-download = Скачать { -brand-name }
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="p">-</span><span class="no">brand-name</span><span class="p"> =</span><span class="l">⠀</span>
+<span class="l">  </span><span class="p">{ </span><span class="nv">$case</span><span class="p"> -&gt;</span>
+<span class="p">    *[</span><span class="na">nominative</span><span class="p">] </span><span class="l">Aiogram</span>
+<span class="p">    [</span><span class="na">prepositional</span><span class="p">] </span><span class="l">Aiogram’е</span>
+<span class="p">  }</span>
+<span class="no">about</span><span class="p"> = </span><span class="l">Информация об </span><span class="p">{ -</span><span class="no">brand-name</span><span class="p">(</span><span class="no">case</span><span class="p">: </span><span class="s">&quot;prepositional&quot;</span><span class="p">) }</span><span class="l">.</span>
+<span class="no">download</span><span class="p"> = </span><span class="l">Скачать </span><span class="p">{ -</span><span class="no">brand-name</span><span class="p"> }</span>
 </pre></div>
 </div>
 </div>
@@ -323,7 +323,7 @@ download = Скачать { -brand-name }
 время:</p>
 <div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">абстрактный пример</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
-<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>order-time = Время заказа: { DATETIME($date, month: &quot;long&quot;, year: &quot;numeric&quot;, day: &quot;numeric&quot;, weekday: &quot;long&quot;) }
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span><span class="no">order-time</span><span class="p"> = </span><span class="l">Время заказа: </span><span class="p">{ </span><span class="no">DATETIME</span><span class="p">(</span><span class="nv">$date</span><span class="p">, </span><span class="no">month</span><span class="p">: </span><span class="s">&quot;long&quot;</span><span class="p">, </span><span class="no">year</span><span class="p">: </span><span class="s">&quot;numeric&quot;</span><span class="p">, </span><span class="no">day</span><span class="p">: </span><span class="s">&quot;numeric&quot;</span><span class="p">, </span><span class="no">weekday</span><span class="p">: </span><span class="s">&quot;long&quot;</span><span class="p">) }</span>
 </pre></div>
 </div>
 </div>
