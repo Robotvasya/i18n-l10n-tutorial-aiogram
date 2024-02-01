@@ -6,4 +6,4 @@
 
 В репозитории примеры кода в виде трех уроков, а само руководство вы можете прочитать по адресу: 
 
-**https://robotvasya.github.io/i18n-l10n-lessons-aiogram/**
+**[https://robotvasya.github.io/i18n-l10n-tutorial-aiogram/](https://robotvasya.github.io/i18n-l10n-tutorial-aiogram/)**
